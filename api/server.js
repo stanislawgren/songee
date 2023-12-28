@@ -1,8 +1,7 @@
 const http = require('http')
-const fs = require('fs')
 const getHandler = require('./handlers/getHandler')
 
-http.createServer((request, response) => {
+const server = http.createServer((request, response) => {
     const { method, url } = request
     let body = ''
     request
@@ -14,9 +13,24 @@ http.createServer((request, response) => {
             body += chunk
         })
         .on('end', () => {
-            // Handle get request
-            getHandler(response, url)
+            switch (method) {
+                case 'GET':
+                    getHandler(response, url)
+                    break
+                case 'POST':
+                    if (url === '/login') {
+                        console.log()
+                        response.writeHead(200, { 'Content-Type': 'application/json' })
+                        response.end(JSON.stringify({ message: 'Login successful' }))
+                    }
+                    break
+                default:
+                    response.writeHead(404, { 'Content-Type': 'application/json' })
+                    response.end(JSON.stringify({ error: 'Endpoint not found' }))
+            }
         })
-}).listen(8080)
+})
 
-console.log('Server running at http://localhost:8080/')
+server.listen(8080, () => {
+    console.log('Server listening on port 8080')
+})
