@@ -1,34 +1,33 @@
 const fs = require('fs')
+const xpath = require('path')
 
 const getHandler = (response, url) => {
-    let path = `../web/public${url}`
     
-    //let dotoffset = url.lastIndexOf('.')
-    // let mimetype =
-            //     dotoffset == -1
-            //         ? 'text/plain'
-            //         : {
-            //               '.html': 'text/html',
-            //               '.ico': 'image/x-icon',
-            //               '.jpg': 'image/jpeg',
-            //               '.png': 'image/png',
-            //               '.gif': 'image/gif',
-            //               '.css': 'text/css',
-            //               '.js': 'text/javascript',
-            //           }[request.url.substr(dotoffset)]
-            // response.setHeader('Content-type', mimetype)
-            // response.end(data)
-            // console.log(request.url, mimetype)
+    let dotoffset = url.lastIndexOf('.')
+    let mimetype =
+        dotoffset == -1
+            ? 'text/html'
+            : {
+                  '.html': 'text/html',
+                  '.ico': 'image/x-icon',
+                  '.jpg': 'image/jpeg',
+                  '.png': 'image/png',
+                  '.gif': 'image/gif',
+                  '.css': 'text/css',
+                  '.js': 'text/javascript',
+              }[url.substr(dotoffset)]
+
+    let path = `../../web/public${url}`
 
     if (url === '/') {
-        path = '../web/public/index.html'
+        path = '../../web/public/index.html'
     } else if (!fs.existsSync(path)) {
-        path = `${path}.html`
+        path = `${path}`
     }
 
-    fs.readFile(path, function (err, html) {
-        let dotoffset = path.lastIndexOf('.')
-        console.log(path)
+    console.log('Path of file in parent dir:', xpath.resolve(__dirname, path))
+
+    fs.readFile(xpath.resolve(__dirname, path), function (err, html) {
         if (err) {
             response.setHeader('Content-Type', 'application/json')
             response.on('error', (err) => {
@@ -38,7 +37,7 @@ const getHandler = (response, url) => {
             response.writeHead(404)
             response.end(JSON.stringify({ error: 'Page not found' }))
         } else {
-            response.writeHeader(200, { 'Content-Type': 'text/html' })
+            response.writeHead(200, { 'Content-Type': mimetype })
             response.end(html)
         }
     })
