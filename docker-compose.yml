@@ -9,13 +9,13 @@ services:
       - 8080:8080
   db:
     image: db
-    container_name: db
+    container_name: songee-db
     build:
       context: .
       dockerfile: ./db/Dockerfile
     environment:
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=root
-      - POSTGRES_DB=songeedb
+      - POSTGRES_DB=songee
     ports:
       - 5432:5432
