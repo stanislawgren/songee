@@ -18,3 +18,5 @@ http.createServer((request, response) => {
             getHandler(response, url)
         })
 }).listen(8080)
+
+console.log('Server running at http://localhost:8080/')
