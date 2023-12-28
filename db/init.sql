@@ -23,14 +23,14 @@ SET row_security = off;
 CREATE SCHEMA songee;
 
 
-ALTER SCHEMA songee OWNER TO postgres;
+ALTER SCHEMA songee OWNER TO root;
 
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
 
 --
--- Name: users; Type: TABLE; Schema: songee; Owner: postgres
+-- Name: users; Type: TABLE; Schema: songee; Owner: root
 --
 
 CREATE TABLE songee.users (
@@ -38,15 +38,14 @@ CREATE TABLE songee.users (
 );
 
 
-ALTER TABLE songee.users OWNER TO postgres;
+ALTER TABLE songee.users OWNER TO root;
 
 --
--- Data for Name: users; Type: TABLE DATA; Schema: songee; Owner: postgres
+-- Data for Name: users; Type: TABLE DATA; Schema: songee; Owner: root
 --
 
 COPY songee.users (id) FROM stdin;
 \.
-
 
 --
 -- PostgreSQL database dump complete
