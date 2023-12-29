@@ -1,9 +1,9 @@
-export default class getServerProps {
-    constructor(url, body) {
-        this.body = body
+import ApiCall from './apiCall.js'
+
+export default class getServerProps extends ApiCall {
+    constructor(url, method, body) {
+        super(url, method, body)
         this.user = {}
-        this.props = []
-        this.url = 'http://localhost:8080/api/' + url
         this.err = []
         this.getUserData()
     }
@@ -16,18 +16,6 @@ export default class getServerProps {
             .then((response) => response.json())
             .then((data) => {
                 this.user = data
-            })
-            .catch((error) => this.err.push(error))
-    }
-
-    async call() {
-        await fetch(this.url, {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' },
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                this.props = data
             })
             .catch((error) => this.err.push(error))
     }
