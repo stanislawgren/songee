@@ -1,6 +1,6 @@
 export default class ApiCall {
     constructor(url, method, body) {
-        this.url = 'http://localhost:8080/api/' + url
+        this.url = 'http://localhost:8080/api' + url
         this.method = method
         this.body = body
         this.props = []
@@ -10,7 +10,10 @@ export default class ApiCall {
         if (this.method == 'GET') {
             await fetch(this.url, {
                 method: this.method,
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Authorization': 'Berear my-token', 
+                    'Content-Type': 'application/json',
+                },
             })
                 .then((response) => response.json())
                 .then((data) => (this.props = data))
@@ -19,7 +22,10 @@ export default class ApiCall {
         } else if (this.method == 'POST') {
             await fetch(this.url, {
                 method: this.method,
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Authorization': 'Berear my-token', 
+                    'Content-Type': 'application/json',
+                },
                 body: JSON.stringify(this.body),
             })
                 .then((response) => response.json())

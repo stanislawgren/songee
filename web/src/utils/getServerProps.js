@@ -11,7 +11,10 @@ export default class getServerProps extends ApiCall {
     async getUserData() {
         await fetch('http://localhost:8080/api/user/getData', {
             method: 'GET',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Authorization': 'Berear my-token',
+                'Content-Type': 'application/json',
+            }
         })
             .then((response) => response.json())
             .then((data) => {

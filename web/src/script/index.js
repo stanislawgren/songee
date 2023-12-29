@@ -1,10 +1,9 @@
-import getServerProps from '../utils/getServerProps.js'
+import pageClass from '../utils/pageClass.js'
 
-const props = new getServerProps('getIndex', 'GET', { example: 'example' })
-
-const getProps = async () => {
-    await props.call()
-    console.log(props.user)
+class indexPage extends pageClass {
+    constructor() {
+        super()
+    }
 }
 
-getProps()
+new indexPage()

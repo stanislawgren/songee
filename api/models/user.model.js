@@ -1,7 +1,11 @@
 const user = () => {}
 
 user.getUserData = (userId) => {
-    console.log('model.getUserData')
+    
+}
+
+user.login = ({username, password}) => {
+    console.log(username, password)
 }
 
 module.exports = user
