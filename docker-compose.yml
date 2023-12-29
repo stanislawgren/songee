@@ -1,21 +1,27 @@
 version: '3'
 
 services:
-  server:
-    container_name: songee-app
-    build: 
-      dockerfile: Dockerfile
-    ports:
-      - 8080:8080
-  db:
-    image: db
-    container_name: songee-db
-    build:
-      context: .
-      dockerfile: ./db/Dockerfile
-    environment:
-      - POSTGRES_USER=root
-      - POSTGRES_PASSWORD=root
-      - POSTGRES_DB=songee
-    ports:
-      - 5432:5432
+    server:
+        container_name: songee-app
+        build:
+            dockerfile: ./api/Dockerfile
+        ports:
+            - 8080:8080
+    db:
+        image: db
+        container_name: songee-db
+        build:
+            context: .
+            dockerfile: ./db/Dockerfile
+        environment:
+            - POSTGRES_USER=root
+            - POSTGRES_PASSWORD=root
+            - POSTGRES_DB=songee
+        ports:
+            - 5432:5432
+    web:
+        container_name: songee-web
+        build:
+            dockerfile: ./web/Dockerfile
+        ports:
+            - 3000:3000

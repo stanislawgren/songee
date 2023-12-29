@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "start": "nodemon ./api/server.js"
+  },
+  "dependencies": {
+    "pg": "^8.11.3",
+    "prettier": "^3.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}
