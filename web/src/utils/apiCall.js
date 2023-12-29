@@ -1,6 +1,6 @@
 export default class ApiCall {
     constructor(url, method, body) {
-        this.url = 'http://localhost:8080/' + url
+        this.url = 'http://localhost:8080/api/' + url
         this.method = method
         this.body = body
     }

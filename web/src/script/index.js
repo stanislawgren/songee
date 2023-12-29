@@ -1,11 +1,10 @@
-import AuthInterface from '../components/AuthInterface.js'
-import ApiCall from '../utils/apiCall.js'
+import getServerProps from '../utils/getServerProps.js'
 
-const authInterface = new AuthInterface()
+const props = new getServerProps('getIndex', { example: 'example' })
 
-const button = document.getElementById('exampleId')
+const getProps = async () => {
+    await props.call()
+    console.log(props.user)
+}
 
-button.addEventListener('click', () => {
-    const apiCall = new ApiCall('login', 'POST', { example: 'example' })
-    apiCall.call()
-})
+getProps()
