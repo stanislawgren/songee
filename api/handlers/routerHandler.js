@@ -5,45 +5,51 @@ const endpoints = {
     user: userRoute,
 }
 
-const router = ({ url, method }, response, token, body = {}) => {
-    
-    let endpointArr = url.split('/')
+const router = ({ url, method }, response, token, body = {}) => {}
 
-    if (endpointArr[1] != 'api') {
-        //getHandler(response, url)
-        return
+module.exports = class RouterClass {
+    #url
+    #method
+    response
+    token
+    body
+
+    constructor({ url, method }, callback, token, body) {
+        this.#url = url
+        this.#method = method
+        this.response = callback
+        this.token = token
+        this.body = body
+
+        this.handleRoute()
     }
 
-    response.setHeader('Content-Type', 'application/json')
+    async handleRoute() {
+        let endpointArr = this.#url.split('/')
 
-    if (endpointArr.length == 4) {
-        console.log(endpoints[endpointArr[2]])
-        endpoints[endpointArr[2]][endpointArr[3]](body)
+        this.response.setHeader('Content-Type', 'application/json')
+
+        if (endpointArr[1] != 'api') {
+            this.response.statusCode = 500
+            this.response.end(JSON.stringify({ message: 'BAD_REQUEST' }))
+            return
+        }
+
+        let res
+
+        console.log(this.body, endpointArr)
+        if (endpointArr.length == 4) {
+            console.log(endpoints[endpointArr[2]])
+            res = await endpoints[endpointArr[2]][endpointArr[3]](this.body)
+        }
+
+        if(res.error) {
+            this.response.statusCode = 500
+            this.response.end(JSON.stringify(res))
+            return
+        }
+
+        this.response.statusCode = 200
+        this.response.end(JSON.stringify(res))
     }
-
-    response.statusCode = 200
-    response.end(JSON.stringify({ message: url }))
-}
-
-module.exports = router
-
-class RouterClass {
-    #endpoints = endpoints
-    #req
-    #callback
-    #token
-    #body
-
-    constructor(req, callback, token, body) {
-        this.#req = { url: req.url, method: req.method }
-        this.#callback = callback
-        this.#token = token
-        this.#body = body
-    }
-
-    #urlHandler() {}
-
-    get(url, callback) {}
-
-    post(url, callback) {}
 }

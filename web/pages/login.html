@@ -1,5 +1,10 @@
 <!doctype html>
 <html lang="en">
+    <script type="module" async>
+        import LoginPage from '../src/script/login.js'
+
+        const loginPage = new LoginPage()
+    </script>
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,7 +12,7 @@
     </head>
     <body>
         <input type="text" name="newID" placeholder="Enter your ID" />
-        <input id="login-button" type="submit" value="Click here to submit the form" />
+        <input id="login-button" type="submit" value="Click here to submit the form"/>
+        <button id="change-state-button">Don't yet registered? Click Here!</button>
     </body>
-    <script type="module" src="../src/script/login.js"></script>
 </html>

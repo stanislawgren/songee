@@ -1,7 +1,7 @@
 {
     "user": "root",
     "host": "localhost",
-    "database": "songeedb",
+    "database": "songee",
     "password": "root",
     "port": 5432
 }

@@ -8,7 +8,7 @@ export default class pageClass {
     constructor() {
         console.log(this.#path)
         if(!this.#authorized) {
-            window.location.href = this.#path + 'login'
+            window.location.href = this.#path + 'login.html'
         }
     }
 

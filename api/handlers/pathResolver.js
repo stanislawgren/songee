@@ -1,4 +1,4 @@
-const path = require('path')
+
 const pathResolver = require('./pathResolver')
 
 const pathResolver = (url) => {

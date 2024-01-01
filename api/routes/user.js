@@ -1,6 +1,7 @@
-const userController = require('../controllers/user.controller')
+let User = require('../controllers/user.controller')
 
 module.exports = {
-    'getData': userController.getUser,
-    'login': userController.login,
+    'getData': new User().getUser,
+    'login': new User().login,
+    'register': new User().register,
 }
