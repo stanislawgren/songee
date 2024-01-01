@@ -1,5 +1,5 @@
 import ApiCall from '../utils/apiCall.js'
-
+import DevManager from '../../../DevManager.js'
 document.getElementById('login-button')
 
 export default class LoginPage {
@@ -7,8 +7,14 @@ export default class LoginPage {
     loginButton = document.getElementById('login-button')
     changeStateButton = document.getElementById('change-state-button')
     state = 'login'
+    path = new DevManager().get()
+    #token = window.localStorage.getItem('token')
 
     constructor() {
+        if (this.#token){
+            window.location.href = this.path + 'index.html'
+        }
+
         this.handleHTML()
     }
 
@@ -18,9 +24,7 @@ export default class LoginPage {
         })
 
         this.loginButton.addEventListener('click', () => {
-            new ApiCall('/user/login', 'POST', { username: 'user1', password: 'pass1' }).call().then(() => {
-                console.log('login')
-            })
+            this.login()
         })
     }
 
@@ -142,7 +146,7 @@ export default class LoginPage {
         const repeatPassword = document.getElementById('repeatPassword').value
         const mail = document.getElementById('mail').value
 
-        if(password != repeatPassword) {
+        if (password != repeatPassword) {
             throw new Error('Passwords do not match')
         }
 
@@ -152,6 +156,21 @@ export default class LoginPage {
     }
 
     async login() {
-        console.log('login')
+        const login = document.getElementById('username').value
+        const password = document.getElementById('password').value
+
+        let res
+
+        await new ApiCall('/user/login', 'POST', { username: login, password: password })
+            .call()
+            .then((response) => response.json())
+            .then((data) => (res = data))
+            .catch((error) => console.error(error))
+
+        console.log(res.token)
+
+        window.localStorage.setItem('token', res.token)
+
+        window.location.href = this.path + 'index.html'
     }
 }

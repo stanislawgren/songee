@@ -14,18 +14,25 @@ module.exports = class UserController {
         try {
             let res = await userModel.register(client, parsedData)
         } catch (err) {
-            return { error: "SERVER_ERROR" }
+            return { error: 'SERVER_ERROR' }
         }
 
         return { message: 'OK' }
     }
 
     async login(data) {
+        let parsedData = JSON.parse(data)
         const client = await getClient()
         const encrypt = new Encrypt()
-        let login = await userModel.login(client, JSON.parse(data))
+        let userData = await userModel.getUserData(client, parsedData)
 
-        console.log(login)
+        const encryptedPassword = encrypt.decryptData(userData.password)
+
+        if(encryptedPassword != parsedData.password) {
+            return { status: 'ERROR', message: 'WRONG_PASSWORD' }
+        }
+
+        return { message: 'OK', token: 'my-token' }
     }
 
     async getUser(data) {
