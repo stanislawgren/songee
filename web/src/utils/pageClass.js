@@ -9,7 +9,7 @@ export default class pageClass {
     constructor() {
         new getServerProps('/xd', { xd: 'xd' })
         if (!this.#authorized) {
-            window.location.href = this.#path + 'login.html'
+            window.location.href = this.#path + 'login'
         }
     }
 }

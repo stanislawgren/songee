@@ -12,7 +12,7 @@ export default class LoginPage {
 
     constructor() {
         if (this.#token) {
-            window.location.href = this.path + 'index.html'
+            window.location.href = this.path + 'index'
         }
 
         this.handleHTML()
