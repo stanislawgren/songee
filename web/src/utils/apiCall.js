@@ -3,12 +3,14 @@ export default class ApiCall {
     method
     body
     props
+    token
 
     constructor(url, method, body) {
         this.url = 'http://localhost:8080/api' + url
         this.method = method
         this.body = body
         this.props = []
+        this.token = window.localStorage.getItem('token')
     }
 
     async call() {
@@ -16,7 +18,7 @@ export default class ApiCall {
             return await fetch(this.url, {
                 method: this.method,
                 headers: {
-                    Authorization: 'Berear my-token',
+                    Authorization: 'Berear ' + this.token,
                     'Content-Type': 'application/json',
                 },
             })
@@ -24,7 +26,7 @@ export default class ApiCall {
             return await fetch(this.url, {
                 method: this.method,
                 headers: {
-                    Authorization: 'Berear my-token',
+                    Authorization: 'Berear ' + this.token,
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(this.body),

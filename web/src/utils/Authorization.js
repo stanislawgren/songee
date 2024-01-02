@@ -4,7 +4,7 @@ export default class Authorization {
     
     constructor() {
        if(this.#token) {
-           if(this.#token == 'my-token') {
+           if(this.#token) {
                this.autorized = true
            }
        } else {

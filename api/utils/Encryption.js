@@ -4,18 +4,17 @@ const crypto = require('crypto')
 
 module.exports = class Encrypt {
     #secretKey
-    #secretIv
     #method
 
     constructor() {
         this.#secretKey = process.env.SECRET_KEY
         this.#method = process.env.ENCRYPTION_METHOD
         const ivLength = 16
-        const paddedIv = Buffer.alloc(ivLength)
-        const providedIv = Buffer.from(process.env.SECRET_IV, 'hex')
-        providedIv.copy(paddedIv)
+        // const paddedIv = Buffer.alloc(ivLength)
+        // const providedIv = Buffer.from(process.env.SECRET_IV, 'hex')
+        // providedIv.copy(paddedIv)
 
-        this.#secretIv = paddedIv
+        // this.#secretIv = paddedIv
     }
 
     encryptData(data) {

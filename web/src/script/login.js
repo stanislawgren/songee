@@ -11,7 +11,7 @@ export default class LoginPage {
     #token = window.localStorage.getItem('token')
 
     constructor() {
-        if (this.#token){
+        if (this.#token) {
             window.location.href = this.path + 'index.html'
         }
 
@@ -150,9 +150,11 @@ export default class LoginPage {
             throw new Error('Passwords do not match')
         }
 
-        new ApiCall('/user/register', 'POST', { username: login, password: password, mail: mail }).call().then(() => {
-            console.log('register')
-        })
+        new ApiCall('/user/register', 'POST', { username: login, password: password, mail: mail })
+            .call()
+            .then((response) => response.json())
+            .then((data) => (res = data))
+            .catch((error) => console.error(error))
     }
 
     async login() {
@@ -167,7 +169,9 @@ export default class LoginPage {
             .then((data) => (res = data))
             .catch((error) => console.error(error))
 
-        console.log(res.token)
+        if (res.error) {
+            throw new Error(res.error)
+        }
 
         window.localStorage.setItem('token', res.token)
 

@@ -6,13 +6,12 @@ module.exports = class UserController {
         let parsedData = JSON.parse(data)
         const client = await getClient()
         const encrypt = new Encrypt()
-        console.log(parsedData)
 
         let passwd = encrypt.encryptData(parsedData.password)
-
+        let res
         parsedData.password = passwd
         try {
-            let res = await userModel.register(client, parsedData)
+            res = await userModel.register(client, parsedData)
         } catch (err) {
             return { error: 'SERVER_ERROR' }
         }
@@ -24,19 +23,47 @@ module.exports = class UserController {
         let parsedData = JSON.parse(data)
         const client = await getClient()
         const encrypt = new Encrypt()
-        let userData = await userModel.getUserData(client, parsedData)
+
+        let userData
+        try {
+            userData = await userModel.getUserData(client, parsedData)
+        } catch (error) {
+            return { error: 'USER_NOT_FOUND' }
+        }
 
         const encryptedPassword = encrypt.decryptData(userData.password)
 
-        if(encryptedPassword != parsedData.password) {
-            return { status: 'ERROR', message: 'WRONG_PASSWORD' }
+        if (encryptedPassword != parsedData.password) {
+            return { error: 'WRONG_PASSWORD' }
         }
 
-        return { message: 'OK', token: 'my-token' }
+        const token = encrypt.encryptData(parsedData.username + '&' + parsedData.password + '&' + userData.id)
+
+        return { message: 'OK', token: token }
+    }
+
+    async validateUser(data) {
+        let parsedData = JSON.parse(data)
+        const client = await getClient()
+        const encrypt = new Encrypt()
+        const encryptedPassword = encrypt.encryptData(parsedData.password)
+
+        parsedData.password = encryptedPassword
+
+        let userData
+        try {
+            userData = await userModel.validateUser(client, parsedData)
+        } catch (error) {
+        }
+
+        if(userData == undefined) {
+            return { error: 'USER_NOT_FOUND' }
+        }
+
+        return { message: 'OK' }
     }
 
     async getUser(data) {
-        console.log('controller.getUser')
-        userModel.getUserData(JSON.parse(data))
+        return { message: 'OK' }
     }
 }
