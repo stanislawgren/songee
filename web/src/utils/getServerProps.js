@@ -20,7 +20,7 @@ export default class getServerProps extends ApiCall {
             .then((data) => {
                 if (data.message == 'UNAUTHORIZED') {
                     window.localStorage.removeItem('token')
-                    window.location.replace('http://localhost:3000/login')
+                    window.location.reload()
                 }
             })
             .catch((error) => {

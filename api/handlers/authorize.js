@@ -26,11 +26,8 @@ class Authorization {
         let authorized = await new UserController().validateUser(
             JSON.stringify({ username: tokenArr[0], password: tokenArr[1], id: tokenArr[2] })
         )
-        if (authorized.message == 'OK') {
-            return true
-        } else {
-            return false
-        }
+
+        return authorized.message == 'OK'
     }
 }
 

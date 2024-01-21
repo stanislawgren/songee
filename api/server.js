@@ -20,22 +20,20 @@ class Server {
             response.setHeader('Access-Control-Request-Headers', '*')
 
             response.setHeader('Content-Type', 'application/json')
-            console.log(request.headers['authorization'])
+            console.log(request.headers['authorization'], request.method)
             if (!request.headers['authorization'] && request.method == 'OPTIONS') {
                 response.writeHead(200)
                 response.end('ok')
                 return
             }
-            if (request.url != '/api/user/login' && request.url != '/api/user/register') {
-                let authorized = await new Authorization(request.headers['authorization'], response).authorize()
+            if (!request.url.includes('/api/user/login', '/api/user/register')) {
+                const authorized = await new Authorization(request.headers['authorization'], response).authorize()
                 if (!authorized) {
                     response.writeHead(401)
                     response.end(JSON.stringify({ message: 'UNAUTHORIZED' }))
                     return
                 }
             }
-
-            const { method, url } = request
             let body = ''
             request
                 .on('error', (err) => {

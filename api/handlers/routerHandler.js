@@ -20,7 +20,7 @@ module.exports = class RouterClass {
     }
 
     async handleRoute() {
-        let endpointArr = this.#url.split('/')
+        const endpointArr = this.#url.split('/')
 
         if (endpointArr[1] != 'api') {
             this.response.statusCode = 500

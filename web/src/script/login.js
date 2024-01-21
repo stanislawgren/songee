@@ -1,5 +1,5 @@
 import ApiCall from '../utils/apiCall.js'
-import DevManager from '../../../DevManager.js'
+import DevManager from '../../DevManager.js'
 document.getElementById('login-button')
 
 export default class LoginPage {
@@ -12,7 +12,7 @@ export default class LoginPage {
 
     constructor() {
         if (this.#token) {
-            window.location.href = this.path + 'index'
+            window.location.href = this.path + 'index.html'
         }
 
         this.handleHTML()
@@ -30,6 +30,7 @@ export default class LoginPage {
 
     changeState() {
         if (this.state == 'login') {
+            //template clone
             this.document.getElementsByTagName('body')[0].innerHTML = ``
             var form = document.createElement('form')
             form.id = 'myForm'
