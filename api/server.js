@@ -26,7 +26,10 @@ class Server {
                 response.end('ok')
                 return
             }
-            if (!request.url.includes('/api/user/login', '/api/user/register')) {
+
+            console.log(request.url.includes('/api/user/login' && '/api/user/register'))
+
+            if (request.url != '/api/user/login' && request.url != '/api/user/register') {
                 const authorized = await new Authorization(request.headers['authorization'], response).authorize()
                 if (!authorized) {
                     response.writeHead(401)

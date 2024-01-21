@@ -12,4 +12,8 @@ export default class pageClass {
             window.location.href = this.#path + 'login.html'
         }
     }
+    
+    handleHTML() {
+        throw new Error('You have to implement the method handleHTML()!')
+    }
 }

@@ -3,6 +3,7 @@ const { getClient } = require('../utils/DatabasePool.js')
 const Encrypt = require('../utils/Encryption.js')
 module.exports = class UserController {
     async register(data) {
+        console.log(data)
         let parsedData = JSON.parse(data)
         const client = await getClient()
         const encrypt = new Encrypt()
@@ -20,6 +21,7 @@ module.exports = class UserController {
     }
 
     async login(data) {
+        console.log(data)
         let parsedData = JSON.parse(data)
         const client = await getClient()
         const encrypt = new Encrypt()
@@ -30,7 +32,7 @@ module.exports = class UserController {
         } catch (error) {
             return { error: 'USER_NOT_FOUND' }
         }
-
+        console.log("chuj")
         const encryptedPassword = encrypt.decryptData(userData.password)
 
         if (encryptedPassword != parsedData.password) {
@@ -38,6 +40,8 @@ module.exports = class UserController {
         }
 
         const token = encrypt.encryptData(parsedData.username + '&' + parsedData.password + '&' + userData.id)
+
+        
 
         return { message: 'OK', token: token }
     }
@@ -53,10 +57,9 @@ module.exports = class UserController {
         let userData
         try {
             userData = await userModel.validateUser(client, parsedData)
-        } catch (error) {
-        }
+        } catch (error) {}
 
-        if(userData == undefined) {
+        if (userData == undefined) {
             return { error: 'USER_NOT_FOUND' }
         }
 
