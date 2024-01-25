@@ -2,8 +2,7 @@ let userRepository = require('../repositories/user.repository.js')
 const { getClient } = require('../utils/DatabasePool.js')
 const Encrypt = require('../utils/Encryption.js')
 module.exports = class UserController {
-    async register(data) {
-        
+    async register(data, xtoken) {
         let parsedData = JSON.parse(data)
         const client = await getClient()
 
@@ -18,10 +17,16 @@ module.exports = class UserController {
             return { error: 'SERVER_ERROR' }
         }
 
+        try {
+            userRepository.setupProfile(client, res)
+        } catch (error) {
+            return { error: 'SERVER_ERROR' }
+        }
+
         return { message: 'OK' }
     }
 
-    async login(data) {
+    async login(data, xtoken) {
         let parsedData = JSON.parse(data)
         const client = await getClient()
 
@@ -69,7 +74,35 @@ module.exports = class UserController {
         return { message: 'OK' }
     }
 
-    async getUser(data) {
+    async getUser(data, token) {
+        const client = await getClient()
+        const encrypt = new Encrypt()
+        const decryptedToken = encrypt.decryptData(token).split('&')
+
+        let res
+        try {
+            res = await userRepository.getUserData(client, { username: decryptedToken[0] })
+        } catch (error) {
+            return { error: 'USER_NOT_FOUND' }
+        }
+
+        delete res.password
+        console.log(res)
+
+        return { message: 'OK', res: res }
+    }
+
+    async updateProfile(data, token) {
+        let parsedData = JSON.parse(data)
+        console.log(parsedData)
+        const client = await getClient()
+        let res
+        try {
+            res = await userRepository.updateUserProfile(client, parsedData)
+        } catch (error) {
+            return { error: 'SERVER_ERROR' }
+        }
+
         return { message: 'OK' }
     }
 }

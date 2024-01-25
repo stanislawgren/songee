@@ -31,7 +31,7 @@ module.exports = class RouterClass {
         let res
         
         if (endpointArr.length == 4) {
-            res = await endpoints[endpointArr[2]][endpointArr[3]](this.body)
+            res = await endpoints[endpointArr[2]][endpointArr[3]](this.body, this.token)
         }
 
         if (res.error || res == undefined) {

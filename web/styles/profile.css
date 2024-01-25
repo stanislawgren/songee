@@ -1,0 +1,21 @@
+@import url('./index.css');
+
+.container-left-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    width: 48%;
+    border-radius: 25px;
+    background-color: #37352e;
+}
+
+.container-right-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    width: 48%;
+    border-radius: 25px;
+    background-color: #37352e;
+}

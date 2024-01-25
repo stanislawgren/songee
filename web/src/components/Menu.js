@@ -21,6 +21,9 @@ export default class CustomMenu extends HTMLElement {
         const userProfileButton = document.createElement('button')
         userProfileButton.textContent = 'Profile'
         userProfileButton.classList.add('custom-menu-button')
+        userProfileButton.addEventListener('click', () => {
+            window.location.href = new DevManager().get() + 'profile.html'
+        })
 
         style.textContent = `
             .custom-menu-button {

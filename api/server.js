@@ -45,7 +45,7 @@ class Server {
                     body += chunk
                 })
                 .on('end', () => {
-                    new router(request, response, 'xd', body)
+                    new router(request, response, request.headers['authorization'].split(' ')[1], body)
                 })
         })
 

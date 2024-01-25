@@ -21,6 +21,16 @@ nav {
     box-shadow: 0px 0px 79px -25px rgba(66, 68, 90, 1);
 }
 
+main {
+    display: flex;
+    flex-direction: row;
+    width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    height: fit-content;
+    gap: 20px;
+}
+
 .nav-adapter {
     position: relative;
     display: flex;

@@ -4,4 +4,5 @@ module.exports = {
     'getData': new UserController().getUser,
     'login': new UserController().login,
     'register': new UserController().register,
+    'updateProfile': new UserController().updateProfile,
 }
