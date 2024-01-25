@@ -95,3 +95,12 @@ button:hover {
     opacity: 0.5;
     z-index: 9;
 }
+
+@media only screen and (max-width: 450px) {
+    button {
+        width: 80%;
+    }
+    input {
+        width: 80%;
+    }
+}

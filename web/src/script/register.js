@@ -1,7 +1,7 @@
 import ApiCall from '../utils/apiCall.js'
 import DevManager from '../../DevManager.js'
 import InputHandler from '../utils/InputHandler.js'
-import ErrorHandler from '../utils/ErrorHandler.js'
+import AlertBox from '../utils/AlertBox.js'
 
 export default class RegisterPage {
     document = document
@@ -22,6 +22,12 @@ export default class RegisterPage {
         this.registerButton.addEventListener('click', () => {
             this.register()
         })
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key == 'Enter') {
+                this.register()
+            }
+        })
     }
 
     async register() {
@@ -33,7 +39,7 @@ export default class RegisterPage {
             )
             this.inputHandler.handleMail(document.getElementById('mail'))
         } catch (error) {
-            new ErrorHandler(error)
+            new AlertBox(error)
             return
         }
 
@@ -43,7 +49,7 @@ export default class RegisterPage {
         const mail = document.getElementById('mail').value
 
         if (password != repeatPassword) {
-            new ErrorHandler('Passwords do not match')
+            new AlertBox('Passwords do not match')
             return
         }
 
@@ -56,11 +62,11 @@ export default class RegisterPage {
             .catch((error) => console.error(error))
 
         if (res.error) {
-            new ErrorHandler(res.error)
+            new AlertBox(res.error)
             return
         }
 
-        if(res.message == 'OK') {
+        if (res.message == 'OK') {
             window.location.href = this.path + 'login.html'
         }
     }

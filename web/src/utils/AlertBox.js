@@ -1,10 +1,13 @@
-export default class ErrorHandler {
+export default class AlertBox {
     constructor(message) {
         this.message = message
         this.addAlertBox()
     }
 
     addAlertBox() {
+        let isAlertOnPage = document.getElementsByClassName('alert-box').length > 0
+        if (isAlertOnPage) return
+        
         let alertBox = document.createElement('div')
         alertBox.id = 'error'
         alertBox.classList.add('alert-box')

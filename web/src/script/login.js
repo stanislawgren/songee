@@ -1,6 +1,6 @@
 import ApiCall from '../utils/apiCall.js'
 import DevManager from '../../DevManager.js'
-import ErrorHandler from '../utils/ErrorHandler.js'
+import AlertBox from '../utils/AlertBox.js'
 import InputHandler from '../utils/InputHandler.js'
 
 export default class LoginPage {
@@ -22,13 +22,19 @@ export default class LoginPage {
         this.loginButton.addEventListener('click', () => {
             this.login()
         })
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key == 'Enter') {
+                this.login()
+            }
+        })
     }
 
     async login() {
         try {
             this.inputHandler.handleLogin(document.getElementById('username'))
         } catch (error) {
-            new ErrorHandler(error)
+            new AlertBox(error)
             return
         }
 
@@ -44,7 +50,7 @@ export default class LoginPage {
             .catch((error) => console.error(error))
 
         if (res.error) {
-            new ErrorHandler(res.error)
+            new AlertBox(res.error)
             return
         }
 

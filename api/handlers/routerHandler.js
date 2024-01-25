@@ -29,7 +29,7 @@ module.exports = class RouterClass {
         }
 
         let res
-        console.log(this.body)
+        
         if (endpointArr.length == 4) {
             res = await endpoints[endpointArr[2]][endpointArr[3]](this.body)
         }

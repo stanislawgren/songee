@@ -1,8 +1,4 @@
 export default class InputHandler {
-    constructor() {
-        this.document = document
-    }
-
     handleLogin(input) {
         if (input.value.length < 5) {
             throw new Error('Username too short')
@@ -21,7 +17,7 @@ export default class InputHandler {
 
     handleMail(input) {
         var regex = /\S+@\S+\.\S+/
-        
+
         if (!regex.test(input.value)) {
             throw new Error('Invalid mail')
         }

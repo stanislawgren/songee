@@ -18,9 +18,7 @@ class Server {
             response.setHeader('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT')
             response.setHeader('Access-Control-Allow-Headers', '*')
             response.setHeader('Access-Control-Request-Headers', '*')
-
             response.setHeader('Content-Type', 'application/json')
-            console.log(request.headers['authorization'], request.method)
             if (!request.headers['authorization'] && request.method == 'OPTIONS') {
                 response.writeHead(200)
                 response.end('ok')

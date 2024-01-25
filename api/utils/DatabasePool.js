@@ -9,7 +9,7 @@ module.exports.getClient = async () => {
             console.log('Database connected')
         })
         .catch((err) => {
-            console.error(err)
+            return err
         })
     return client
 }
