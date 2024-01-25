@@ -18,15 +18,16 @@ class Server {
             response.setHeader('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT')
             response.setHeader('Access-Control-Allow-Headers', '*')
             response.setHeader('Access-Control-Request-Headers', '*')
-
             response.setHeader('Content-Type', 'application/json')
-            console.log(request.headers['authorization'], request.method)
             if (!request.headers['authorization'] && request.method == 'OPTIONS') {
                 response.writeHead(200)
                 response.end('ok')
                 return
             }
-            if (!request.url.includes('/api/user/login', '/api/user/register')) {
+
+            console.log(request.url.includes('/api/user/login' && '/api/user/register'))
+
+            if (request.url != '/api/user/login' && request.url != '/api/user/register') {
                 const authorized = await new Authorization(request.headers['authorization'], response).authorize()
                 if (!authorized) {
                     response.writeHead(401)

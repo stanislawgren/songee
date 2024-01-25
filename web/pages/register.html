@@ -1,16 +1,16 @@
 <!doctype html>
 <html lang="en">
     <script type="module" async>
-        import LoginPage from '../src/script/login.js'
-
-        const loginPage = new LoginPage()
+        import RegisterPage from '../src/script/register.js'
+        
+        const registerPage = new RegisterPage()
     </script>
-    <link rel="stylesheet" href="../styles/auth.css" />
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>SONGEE - Login</title>
+        <title>SONGEE - Register</title>
     </head>
+    <link rel="stylesheet" href="../styles/auth.css" />
     <body>
         <div id="container-left">
             <div class="centring-container">
@@ -22,8 +22,10 @@
             <div class="centring-container">
                 <input type="text" id="username" placeholder="USERNAME" />
                 <input type="password" id="password" placeholder="PASSWORD" />
-                <button id="login-button">LOGIN</button>
-                <a class="a-signup" href="./register.html">Don't have an account? Sign Up</a>
+                <input type="password" id="repeat-password" placeholder="REPEAT PASSWORD" />
+                <input type="text" id="mail" placeholder="MAIL" />
+                <button id="register-button">REGISTER</button>
+                <a class="a-signup" href="./login.html">Already have an account? Sign in!</a>
             </div>
         </div>
     </body>

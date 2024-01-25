@@ -24,7 +24,7 @@ export default class getServerProps extends ApiCall {
                 }
             })
             .catch((error) => {
-                console.log(error)
+                console.error(error)
             })
     }
 }
