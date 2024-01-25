@@ -10,6 +10,7 @@ nav {
     width: 100%;
     height: 100px;
     display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     position: -webkit-sticky; /* Safari */
@@ -19,8 +20,20 @@ nav {
     -moz-box-shadow: 0px 0px 79px -25px rgba(66, 68, 90, 1);
     box-shadow: 0px 0px 79px -25px rgba(66, 68, 90, 1);
 }
+
+.nav-adapter {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 1000px;
+}
+
 body {
     margin: 0;
+    display: flex;
+    flex-direction: column;
 }
 .nav-title {
     font-weight: bold;
@@ -94,6 +107,59 @@ button:hover {
     background-color: #000000;
     opacity: 0.5;
     z-index: 9;
+}
+
+.nav-button {
+    background-color: rgba(66, 68, 90, 0.2);
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    border: none;
+    border-radius: 30px;
+    font-size: 15px;
+    font-weight: bold;
+    color: #ffffff;
+    transition: box-shadow 0.3s ease-in-out;
+    padding: 0;
+    margin: 0;
+}
+
+custom-menu {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    height: fit-content;
+    padding: 20px;
+    border-radius: 30px;
+    width: 200px;
+    background-color: #292720;
+    color: white;
+    font-size: 0.8rem;
+}
+
+.menu-active {
+    display: flex !important;
+}
+.custom-menu-button {
+    color: aqua;
+}
+
+@media only screen and (max-width: 1060px) {
+    custom-menu {
+        right: 20px;
+    }
+
+    .nav-adapter {
+        width: 100%;
+    }
+
+    .nav-button {
+        margin: 0 30px 0 30px;
+    }
 }
 
 @media only screen and (max-width: 450px) {

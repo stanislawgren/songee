@@ -3,6 +3,7 @@
 body {
     display: flex;
     height: 90vh;
+    flex-direction: row;
 }
 
 .container-left-title {
