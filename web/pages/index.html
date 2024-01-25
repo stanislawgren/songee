@@ -1,17 +1,30 @@
 <!doctype html>
 <html lang="en">
+    <script type="module" async>
+        import indexPage from '../src/script/index.js'
+
+        const index = new indexPage()
+    </script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>SONGEE</title>
         <link rel="stylesheet" href="../styles/index.css" />
     </head>
-    <nav>
-        <a class="nav-title">SONGEE</a>
-    </nav>
+
     <body>
-        <h1>Songeee</h1>
+        <nav>
+            <div class="nav-adapter">
+                <button class="nav-button" id="home-page-button">
+                    <span class="material-icons">home</span>
+                </button>
+                <a class="nav-title">SONGEE</a>
+                <button class="nav-button" id="menu-button">
+                    <span class="material-icons">menu</span>
+                </button>
+                <custom-menu></custom-menu>
+            </div>
+        </nav>
     </body>
-    <script type="module" src="../src/script/index.js"></script>
-    <button id="exampleId">xd</button>
 </html>
