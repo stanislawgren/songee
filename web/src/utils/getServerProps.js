@@ -1,8 +1,8 @@
 import ApiCall from './apiCall.js'
 
-export default class getServerProps extends ApiCall {
-    constructor(url, body) {
-        super(url, 'GET', body)
+export default class getServerProps  {
+    constructor() {
+        this.token = window.localStorage.getItem('token')
         this.err = []
     }
 
@@ -20,7 +20,7 @@ export default class getServerProps extends ApiCall {
                 res = data.res
                 if (data.message == 'UNAUTHORIZED') {
                     window.localStorage.removeItem('token')
-                    window.location.reload()
+                    // window.location.reload()
                 }
             })
             .catch((error) => {

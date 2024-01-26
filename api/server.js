@@ -16,7 +16,7 @@ class Server {
 
     #handleServer() {
         const server = http.createServer(async (request, response) => {
-            response.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000')
+            response.setHeader('Access-Control-Allow-Origin', 'http://localhost:5500')
             response.setHeader('Access-Control-Allow-Credentials', 'true')
             response.setHeader('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT')
             response.setHeader('Access-Control-Allow-Headers', '*')

@@ -42,19 +42,10 @@
 }
 
 #avatar {
-    /* This image is 687 wide by 1024 tall, similar to your aspect ratio */
-
-    /* make a square container */
     width: 150px;
     height: 150px;
-
-    /* fill the container, preserving aspect ratio, and cropping to fit */
     background-size: cover;
-
-    /* center the image vertically and horizontally */
     background-position: top center;
-
-    /* round the edges to a circle with border radius 1/2 container size */
     border-radius: 50%;
 }
 
@@ -64,7 +55,7 @@
     flex-direction: row;
     align-items: center;
     padding: 20px;
-    justify-content: space-between;
+    gap: 20px;
     width: calc(100% - 40px);
     height: 160px;
     background-color: #ffc300;
@@ -116,4 +107,56 @@ textarea {
     transition: box-shadow 0.3s ease-in-out;
     padding: 0;
     margin: 0;
+}
+
+ul {
+    display: none;
+    background-color: #9d7900;
+    list-style-type: none;
+    margin: 0;
+    margin-bottom: 10px;
+    padding: 15px;
+    border-radius: 0px 0px 10px 10px;
+    width: 75%;
+    flex-direction: column;
+    gap: 15px;
+
+    li {
+        background-color: #ffc300;
+        color: #ffffff;
+        padding: 10px;
+        border-radius: 20px;
+        cursor: pointer;
+    }
+}
+
+.list-active {
+    display: flex !important;
+}
+
+#save-profile-data-button {
+    margin-top: 20px;
+}
+
+.genre-badge {
+    background-color: #ffc300;
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+#user-genres {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 0px 10px 10px 10px;
+}
+
+.profile-wrapper-credencials {
+    color: #ffffff;
+    font-size: 150%;
+    font-weight: bold;
 }

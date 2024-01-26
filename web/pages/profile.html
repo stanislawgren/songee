@@ -34,9 +34,9 @@
                     </button>
                     <img id="avatar" src="../../api/avatars/s-l1600.jpg"></img>
                     <input type="file" id="avatar-input" hidden accept="image/*" />
-                    <span>
-                        <span>Username</span>
-                        <span>Age</span>
+                    <span class="profile-wrapper-credencials">
+                        <span id="profile-wrapper-username">Username</span>
+                        <span id="profile-wrapper-age">Age</span>
                     </span>
                 </div>
                 <div class="container-left-profile-inside">xd</div>
@@ -50,7 +50,9 @@
                 <h2>Description</h2>
                 <textarea id="description" maxlength="1024" placeholder="DESCRIPTION"></textarea>
                 <h2>Favourite Genres</h2>
-                <input type="text" id="location" class="profile-input" value="Search for genre..." />
+                <div id="user-genres"></div>
+                <input type="text" id="genre-input" class="profile-input" placeholder="Search for genre..." style="margin: 0;"/>
+                <ul id="genres-list"></ul>
                 <button id="save-profile-data-button">SAVE DATA</button>
             </div>
         </main>

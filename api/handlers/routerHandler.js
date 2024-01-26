@@ -1,10 +1,11 @@
 let userRoute = require('../routes/user.js')
 let fileRoute = require('../routes/file.js')
-const formidable = require('formidable')
+let pageRoute = require('../routes/page.js')
 
 const endpoints = {
     user: userRoute,
     file: fileRoute,
+    page: pageRoute,
 }
 
 module.exports = class RouterClass {

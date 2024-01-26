@@ -3,18 +3,18 @@ import DevManager from '../../DevManager.js'
 import getServerProps from './getServerProps.js'
 import CustomMenu from '../components/Menu.js'
 
-export default class pageClass extends getServerProps{
+export default class pageClass extends getServerProps {
     #authorized = new Authorization().autorized
     #path = new DevManager().get()
 
     constructor() {
-        super()
+        super('/api/page/getProfilePage', {})
 
         const menu = new CustomMenu()
         if (!this.#authorized) {
             window.location.href = this.#path + 'login.html'
         }
-        
+
         this.#handleNavbar()
     }
 

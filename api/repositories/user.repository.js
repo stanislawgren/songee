@@ -45,11 +45,11 @@ user.getUserData = async (client, { username }) => {
     })
 }
 
-user.updateUserProfile = async (client, { id, firstName, lastName, location }) => {
+user.updateUserProfile = async (client, { id, firstName, lastName, location, description, age }) => {
     return new Promise((resolve, reject) => {
         client.query(
-            `UPDATE songee_schema.user_profiles SET first_name = $1, last_name = $2, location = $3 WHERE user_id = $4`,
-            [firstName, lastName, location, id],
+            `UPDATE songee_schema.user_profiles SET first_name = $1, last_name = $2, location = $3, description = $4, age = $5 WHERE user_id = $6`,
+            [firstName, lastName, location, description, age, id],
             (err, res) => {
                 if (err) {
                     reject(err)
@@ -58,6 +58,46 @@ user.updateUserProfile = async (client, { id, firstName, lastName, location }) =
                 }
             }
         )
+    })
+}
+
+user.getUserGenres = async (client, { id }) => {
+    return new Promise((resolve, reject) => {
+        client.query(
+            `SELECT songee.songee_schema.genres.name FROM songee.songee_schema.users_genres INNER JOIN songee.songee_schema.genres ON users_genres.genres_id = genres.id WHERE user_id = $1`,
+            [id],
+            (err, res) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(res.rows)
+                }
+            }
+        )
+    })
+}
+
+user.updateUserGenres = async (client, { id, genres }) => {
+    return new Promise((resolve, reject) => {
+        client.query(`DELETE FROM songee_schema.users_genres WHERE user_id = $1`, [id], (err, res) => {
+            if (err) {
+                reject(err)
+            } else {
+                console.log(genres)
+                genres.forEach((genre) => {
+                    client.query(
+                        `INSERT INTO songee_schema.users_genres (user_id, genres_id) VALUES ($1, $2)`,
+                        [id, genre],
+                        (err, res) => {
+                            if (err) {
+                                reject(err)
+                            }
+                        }
+                    )
+                })
+                resolve(res)
+            }
+        })
     })
 }
 
