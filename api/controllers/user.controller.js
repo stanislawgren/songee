@@ -87,14 +87,12 @@ module.exports = class UserController {
         }
 
         delete res.password
-        console.log(res)
 
         return { message: 'OK', res: res }
     }
 
     async updateProfile(data, token) {
         let parsedData = JSON.parse(data)
-        console.log(parsedData)
         const client = await getClient()
         let res
         try {

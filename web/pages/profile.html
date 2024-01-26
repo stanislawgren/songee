@@ -28,13 +28,30 @@
         </nav>
         <main>
             <div class="container-left-profile">
-                <input type="text" id="first-name" placeholder="FIRST NAME" />
-                <input type="text" id="last-name" placeholder="LAST NAME" />
-                <input type="text" id="location" placeholder="LOCATION" />
-                <button id="save-profile-data-button">SAVE DATA</button>
+                <div class="profile-wrapper">
+                    <button class="edit-profile-button" id="home-page-button">
+                        <span class="material-icons">edit</span>
+                    </button>
+                    <img id="avatar" src="../../api/avatars/s-l1600.jpg"></img>
+                    <input type="file" id="avatar-input" hidden accept="image/*" />
+                    <span>
+                        <span>Username</span>
+                        <span>Age</span>
+                    </span>
+                </div>
+                <div class="container-left-profile-inside">xd</div>
             </div>
             <div class="container-right-profile">
+                <h2>User Data</h2>
+                <input type="text" id="first-name" class="profile-input" placeholder="FIRST NAME" />
+                <input type="text" id="last-name" class="profile-input" placeholder="LAST NAME" />
+                <input type="text" id="location" class="profile-input" placeholder="LOCATION" />
+                <input type="text" id="age" class="profile-input" placeholder="AGE" />
+                <h2>Description</h2>
                 <textarea id="description" maxlength="1024" placeholder="DESCRIPTION"></textarea>
+                <h2>Favourite Genres</h2>
+                <input type="text" id="location" class="profile-input" value="Search for genre..." />
+                <button id="save-profile-data-button">SAVE DATA</button>
             </div>
         </main>
     </body>

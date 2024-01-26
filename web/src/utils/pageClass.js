@@ -19,6 +19,11 @@ export default class pageClass extends getServerProps{
     }
 
     #handleNavbar() {
+        const homePageButton = document.getElementById('home-page-button')
+        homePageButton.addEventListener('click', () => {
+            window.location.href = this.#path + 'index.html'
+        })
+
         const menuButton = document.getElementById('menu-button')
         menuButton.addEventListener('click', () => {
             document.getElementsByTagName('custom-menu').item(0).classList.toggle('menu-active')

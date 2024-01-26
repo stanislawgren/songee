@@ -27,7 +27,6 @@ user.setupProfile = async (client, { id }) => {
 }
 
 user.getUserData = async (client, { username }) => {
-    console.log(username)
     return new Promise((resolve, reject) => {
         client.query(
             `SELECT * FROM songee_schema.users INNER JOIN songee_schema.user_profiles ON users.id = user_profiles.user_id WHERE username = $1`,
@@ -37,7 +36,6 @@ user.getUserData = async (client, { username }) => {
                     console.log(err)
                     reject(err)
                 } else if (res.rows[0] == undefined) {
-                    console.log('cipaxd')
                     reject('USER_NOT_FOUND')
                 } else {
                     resolve(res.rows[0])

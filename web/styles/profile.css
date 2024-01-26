@@ -4,10 +4,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
-    width: 48%;
+    width: 60%;
+    height: fit-content;
     border-radius: 25px;
-    background-color: #37352e;
+    background-color: #605943;
+    -webkit-box-shadow: inset 0px 0px 93px -38px rgba(0, 0, 0, 1);
+    -moz-box-shadow: inset 0px 0px 93px -38px rgba(0, 0, 0, 1);
+    box-shadow: inset 0px 0px 93px -38px rgba(0, 0, 0, 1);
 }
 
 .container-right-profile {
@@ -15,7 +18,102 @@
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    width: 48%;
+    height: fit-content;
+    width: 40%;
     border-radius: 25px;
-    background-color: #37352e;
+    background-color: #605943;
+    -webkit-box-shadow: inset 0px 0px 93px -38px rgba(0, 0, 0, 1);
+    -moz-box-shadow: inset 0px 0px 93px -38px rgba(0, 0, 0, 1);
+    box-shadow: inset 0px 0px 93px -38px rgba(0, 0, 0, 1);
+}
+
+.profile-input {
+    background-color: #9d7900;
+    -webkit-box-shadow: inset 0px 0px 40px -14px rgba(0, 0, 0, 1);
+    -moz-box-shadow: inset 0px 0px 40px -14px rgba(0, 0, 0, 1);
+    box-shadow: inset 0px 0px 40px -14px rgba(0, 0, 0, 1);
+    color: #ffffff;
+}
+
+.profile-input:focus {
+    -webkit-box-shadow: inset 0px 0px 40px -20px rgba(0, 0, 0, 1);
+    -moz-box-shadow: inset 0px 0px 40px -20px rgba(0, 0, 0, 1);
+    box-shadow: inset 0px 0px 40px -20px rgba(0, 0, 0, 1);
+}
+
+#avatar {
+    /* This image is 687 wide by 1024 tall, similar to your aspect ratio */
+
+    /* make a square container */
+    width: 150px;
+    height: 150px;
+
+    /* fill the container, preserving aspect ratio, and cropping to fit */
+    background-size: cover;
+
+    /* center the image vertically and horizontally */
+    background-position: top center;
+
+    /* round the edges to a circle with border radius 1/2 container size */
+    border-radius: 50%;
+}
+
+.profile-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 20px;
+    justify-content: space-between;
+    width: calc(100% - 40px);
+    height: 160px;
+    background-color: #ffc300;
+    border-radius: 25px;
+}
+
+h2 {
+    font-weight: bold;
+    color: #ffc300;
+}
+
+textarea {
+    background-color: #9d7900;
+    -webkit-box-shadow: inset 0px 0px 40px -14px rgba(0, 0, 0, 1);
+    -moz-box-shadow: inset 0px 0px 40px -14px rgba(0, 0, 0, 1);
+    box-shadow: inset 0px 0px 40px -14px rgba(0, 0, 0, 1);
+    color: #ffffff;
+    width: 85%;
+    height: 80px;
+    border-radius: 25px;
+    border: 0;
+    padding: 20px;
+}
+
+.container-left-profile-inside {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: fit-content;
+    padding: 20px;
+}
+
+.edit-profile-button {
+    position: absolute;
+    top: 20px;
+    left: 120px;
+    background-color: #ffffff;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    border: none;
+    border-radius: 30px;
+    font-size: 15px;
+    font-weight: bold;
+    color: #9d7900;
+    transition: box-shadow 0.3s ease-in-out;
+    padding: 0;
+    margin: 0;
 }

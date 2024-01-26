@@ -1,7 +1,10 @@
 let userRoute = require('../routes/user.js')
+let fileRoute = require('../routes/file.js')
+const formidable = require('formidable')
 
 const endpoints = {
     user: userRoute,
+    file: fileRoute,
 }
 
 module.exports = class RouterClass {
@@ -10,17 +13,18 @@ module.exports = class RouterClass {
     token
     body
 
-    constructor({ url }, callback, token, body) {
-        this.#url = url
+    constructor(req, callback, token, body) {
+        this.req = req
+        this.#url = req.url
         this.response = callback
         this.token = token
         this.body = body
-
         this.handleRoute()
     }
 
     async handleRoute() {
         const endpointArr = this.#url.split('/')
+        console.log(endpointArr)
 
         if (endpointArr[1] != 'api') {
             this.response.statusCode = 500
@@ -29,7 +33,7 @@ module.exports = class RouterClass {
         }
 
         let res
-        
+
         if (endpointArr.length == 4) {
             res = await endpoints[endpointArr[2]][endpointArr[3]](this.body, this.token)
         }

@@ -1,5 +1,5 @@
 export default class DevManager {
-    #type = "dev"
+    #type = "prod"
     #paths = {
         "dev": "http://localhost:5500/songee/web/pages/",
         "prod": "http://localhost:3000/"
