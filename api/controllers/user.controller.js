@@ -49,7 +49,7 @@ module.exports = class UserController {
             return { error: 'WRONG_PASSWORD' }
         }
 
-        const token = encrypt.encryptData(parsedData.username + '&' + parsedData.password + '&' + userData.id)
+        const token = encrypt.encryptData(parsedData.username + '&' + parsedData.password + '&' + userData.user_id)
 
         return { message: 'OK', token: token }
     }

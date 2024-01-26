@@ -28,8 +28,4 @@ export default class getServerProps extends ApiCall {
             })
         return res
     }
-
-    getUser() {
-        return this.user
-    }
 }
