@@ -47,7 +47,18 @@ user.getUserData = async (client, { username }) => {
 
 user.updateUserProfile = async (
     client,
-    { id, firstName, lastName, location, description, age, favouriteSongArtist, favouriteSongTitle, favouriteArtist, gender }
+    {
+        id,
+        firstName,
+        lastName,
+        location,
+        description,
+        age,
+        favouriteSongArtist,
+        favouriteSongTitle,
+        favouriteArtist,
+        gender,
+    }
 ) => {
     return new Promise((resolve, reject) => {
         client.query(
@@ -126,6 +137,120 @@ user.validateUser = async (client, { username, password, id }) => {
                     reject({ error: 'USER_NOT_FOUND' })
                 } else {
                     resolve(res.rows[0])
+                }
+            }
+        )
+    })
+}
+
+user.getUsersProfiles = async (client, { user_id, gender }) => {
+    return new Promise((resolve, reject) => {
+        client.query(
+            `SELECT songee.songee_schema.user_profiles.user_id,
+                    songee.songee_schema.user_profiles.description,
+                    songee.songee_schema.user_profiles.avatar,
+                    songee.songee_schema.user_profiles.first_name,
+                    songee.songee_schema.user_profiles.last_name,
+                    songee.songee_schema.user_profiles.location,
+                    songee.songee_schema.user_profiles.age,
+                    STRING_AGG(songee.songee_schema.genres.name, ', ') AS favorite_genres
+            FROM songee.songee_schema.user_profiles
+            JOIN songee.songee_schema.users ON user_profiles.user_id = users.id
+            JOIN songee.songee_schema.users_genres ON user_profiles.user_id = users_genres.user_id
+            JOIN songee.songee_schema.genres ON users_genres.genres_id = genres.id
+            WHERE users.id <> $1 AND user_profiles.gender <> $2
+            group by user_profiles.user_id,
+                    songee.songee_schema.user_profiles.description,
+                    songee.songee_schema.user_profiles.location,
+                    songee.songee_schema.user_profiles.last_name,
+                    songee.songee_schema.user_profiles.first_name,
+                    songee.songee_schema.user_profiles.avatar, 
+                    songee.songee_schema.user_profiles.age`,
+            [user_id, gender],
+            (err, res) => {
+                if (err) {
+                    console.log(err)
+                    reject(err)
+                } else {
+                    resolve(res.rows)
+                }
+            }
+        )
+    })
+}
+
+user.checkForLike = async (client, { user_id, liked_id }) => {
+    return new Promise((resolve, reject) => {
+        client.query(
+            `SELECT * FROM songee.songee_schema.likes WHERE user_id = $1 AND liked_id = $2`,
+            [user_id, liked_id],
+            (err, res) => {
+                if (err) {
+                    reject(err)
+                } else if (res.rows[0] == undefined) {
+                    resolve({ msg: 'NOT_FOUND' })
+                } else {
+                    resolve(res.rows[0])
+                }
+            }
+        )
+    })
+}
+
+user.addLike = async (client, { user_id, liked_id }) => {
+    return new Promise((resolve, reject) => {
+        client.query(
+            `INSERT INTO songee.songee_schema.likes (user_id, liked_id, value) VALUES ($1, $2, 1)`,
+            [user_id, liked_id],
+            (err, res) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(res)
+                }
+            }
+        )
+    })
+}
+
+user.getLikes = async (client, { user_id }) => {
+    return new Promise((resolve, reject) => {
+        client.query(`SELECT * FROM songee.songee_schema.likes WHERE user_id = $1`, [user_id], (err, res) => {
+            if (err) {
+                reject(err)
+            } else {
+                resolve(res.rows)
+            }
+        })
+    })
+}
+
+user.addPair = async (client, { user_id, user_id_2 }) => {
+    return new Promise((resolve, reject) => {
+        client.query(
+            `INSERT INTO songee.songee_schema.pairs (user_id_1, user_id_2) VALUES ($1, $2)`,
+            [user_id, user_id_2],
+            (err, res) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(res)
+                }
+            }
+        )
+    })
+}
+
+user.addDislike = async (client, { user_id, user_id_2 }) => {
+    return new Promise((resolve, reject) => {
+        client.query(
+            `INSERT INTO songee.songee_schema.likes (user_id, liked_id, value) VALUES ($1, $2, 0)`,
+            [user_id, user_id_2],
+            (err, res) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(res)
                 }
             }
         )
