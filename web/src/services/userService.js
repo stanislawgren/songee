@@ -24,4 +24,40 @@ export default class UserService {
 
         return res
     }
+
+    async getUsersProfiles() {
+        let res
+
+        await new ApiCall('/user/getUsersProfiles', 'GET')
+            .call()
+            .then((response) => response.json())
+            .then((data) => (res = data))
+            .catch((error) => console.error(error))
+
+        return res
+    }
+
+    async likeUser(userId) {
+        let res
+
+        await new ApiCall('/user/likeUser', 'POST', { userId: userId })
+            .call()
+            .then((response) => response.json())
+            .then((data) => (res = data))
+            .catch((error) => console.error(error))
+
+        return res
+    }
+
+    async dislikeUser(userId) {
+        let res
+
+        await new ApiCall('/user/dislikeUser', 'POST', { userId: userId })
+            .call()
+            .then((response) => response.json())
+            .then((data) => (res = data))
+            .catch((error) => console.error(error))
+
+        return res
+    }
 }

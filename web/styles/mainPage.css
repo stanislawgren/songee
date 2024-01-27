@@ -41,6 +41,8 @@
 .main-page-profile-container {
     position: absolute;
     display: flex;
+    opacity: 1;
+    left: 0px;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
@@ -53,6 +55,19 @@
     -webkit-box-shadow: inset 0px 0px 93px -38px rgba(0, 0, 0, 1);
     -moz-box-shadow: inset 0px 0px 93px -38px rgba(0, 0, 0, 1);
     box-shadow: inset 0px 0px 93px -38px rgba(0, 0, 0, 1);
+    transition: all 0.3s ease-in-out;
+}
+
+.main-page-profile-container-liked{
+    left: 200px;
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+}
+
+.main-page-profile-container-disliked{
+    left: -200px;
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
 }
 
 .other-profile-wrapper {
@@ -112,6 +127,8 @@
     gap: 5px;
     margin: 10px 10px 0px 10px;
 }
+
+
 
 @media only screen and (max-width: 1060px) {
     .container-left-profile {

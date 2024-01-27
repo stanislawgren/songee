@@ -24,6 +24,20 @@ export default class CustomMenu extends HTMLElement {
             window.location.href = new DevManager().get() + 'profile.html'
         })
 
+        const settingsButton = document.createElement('button')
+        settingsButton.textContent = 'Settings'
+        settingsButton.classList.add('custom-menu-button')
+        settingsButton.addEventListener('click', () => {
+            window.location.href = new DevManager().get() + 'settings.html'
+        })
+
+        const chatButton = document.createElement('button')
+        chatButton.textContent = 'Chat'
+        chatButton.classList.add('custom-menu-button')
+        chatButton.addEventListener('click', () => {
+            window.location.href = new DevManager().get() + 'chat.html'
+        })
+
         style.textContent = `
             .custom-menu-button {
                 background-color: #322f26;
@@ -45,6 +59,8 @@ export default class CustomMenu extends HTMLElement {
 
         shadowRoot.appendChild(style)
         shadowRoot.appendChild(userProfileButton)
+        shadowRoot.appendChild(chatButton)
+        shadowRoot.appendChild(settingsButton)
         shadowRoot.appendChild(logoutButton)
     }
 

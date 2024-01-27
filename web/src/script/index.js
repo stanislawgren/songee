@@ -1,5 +1,7 @@
 import pageClass from '../utils/pageClass.js'
 import DevManager from '../../DevManager.js'
+import UserService from '../services/userService.js'
+import AlertBox from '../utils/AlertBox.js'
 
 export default class indexPage extends pageClass {
     user = {
@@ -16,17 +18,37 @@ export default class indexPage extends pageClass {
         favourite_artist: '',
         genres: [],
     }
+
+    users = []
+
+    userService = new UserService()
+
     #path = new DevManager().get()
 
     constructor() {
         super()
 
         this.handleHTML()
-        this.generateProfile()
     }
 
     async handleHTML() {
         this.user = { ...(await this.getUserData()) }
+
+        this.users = await this.getUsers()
+
+        console.log(this.users)
+
+        this.users.forEach((user) => {
+            this.generateProfile(
+                user.first_name,
+                user.age,
+                user.location,
+                user.description,
+                user.favorite_genres,
+                user.user_id,
+                user.avatar
+            )
+        })
 
         document.getElementById('avatar').src = '../../api/avatars/' + this.user.avatar
         document.getElementById('fav-song-title').value = this.user.favourite_song_title
@@ -57,6 +79,11 @@ export default class indexPage extends pageClass {
         this.generateGenres()
     }
 
+    async getUsers() {
+        const users = await this.userService.getUsersProfiles()
+        return users.res
+    }
+
     generateGenres() {
         const genresDiv = document.getElementById('user-genres')
         genresDiv.innerHTML = ''
@@ -68,7 +95,7 @@ export default class indexPage extends pageClass {
         }
     }
 
-    async generateProfile(username, age, location, description, xgenres, user_id) {
+    async generateProfile(first_name, age, location, description, xgenres, user_id, avatar) {
         const profileContainer = document.getElementsByClassName('main-page-profiles-conatiner')[0]
 
         const profileDiv = document.createElement('div')
@@ -79,18 +106,23 @@ export default class indexPage extends pageClass {
 
         const profileImage = document.createElement('img')
         profileImage.classList.add('main-page-profiles-avatar')
-        profileImage.src = 'https://www.w3schools.com/howto/img_avatar.png'
+
+        if (avatar) {
+            profileImage.src = '../../api/avatars/' + avatar
+        } else {
+            profileImage.src = 'https://www.w3schools.com/howto/img_avatar.png'
+        }
 
         const profileCredentials = document.createElement('div')
         profileCredentials.classList.add('index-wrapper-credencials')
 
         const usernameSpan = document.createElement('span')
-        usernameSpan.innerText = 'Username, Age'
+        usernameSpan.innerText = first_name + ', ' + age
         const locationSpan = document.createElement('span')
-        locationSpan.innerText = 'Location'
+        locationSpan.innerText = location
 
         const descriptionTextarea = document.createElement('textarea')
-        descriptionTextarea.value = 'Description'
+        descriptionTextarea.value = description
         descriptionTextarea.disabled = true
 
         const buttonsWrapper = document.createElement('div')
@@ -100,14 +132,35 @@ export default class indexPage extends pageClass {
         dislikeButton.classList.add('main-page-profile-dislike-button')
         dislikeButton.innerText = 'X'
 
+        dislikeButton.addEventListener('click', async () => {
+            let res = await this.userService.dislikeUser(user_id)
+
+            profileDiv.classList.add('main-page-profile-container-disliked')
+            setTimeout(() => {
+                profileContainer.removeChild(profileDiv)
+            }, 300)
+        })
+
         const likeButton = document.createElement('button')
         likeButton.classList.add('main-page-profile-like-button')
-        likeButton.innerText = 'O'
+        likeButton.innerText = '✔'
+
+        likeButton.addEventListener('click', async () => {
+            let res = await this.userService.likeUser(user_id)
+
+            if (res.message == 'PAIR_DETECTED') {
+                new AlertBox('You have a match with ' + first_name + '!')
+            }
+            profileDiv.classList.add('main-page-profile-container-liked')
+            setTimeout(() => {
+                profileContainer.removeChild(profileDiv)
+            }, 300)
+        })
 
         const favouriteGenres = document.createElement('h2')
         favouriteGenres.innerText = 'Favourite genres'
 
-        const genres = ['rock']
+        const genres = xgenres.split(',')
 
         const genresDiv = document.createElement('div')
         genresDiv.classList.add('main-page-other-user-genres')
