@@ -10,7 +10,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>SONGEE</title>
-        <link rel="stylesheet" href="../styles/index.css" />
+        <link rel="stylesheet" href="../styles/mainPage.css" />
     </head>
 
     <body>
@@ -26,5 +26,32 @@
                 <custom-menu></custom-menu>
             </div>
         </nav>
+        <main>
+            <div class="container-left-profile" style="width: 50%;">
+                <div class="profile-wrapper">
+                    <img id="avatar" src="../../api/avatars/s-l1600.jpg"></img>
+                    <input type="file" id="avatar-input" hidden accept="image/*" />
+                    <span class="index-wrapper-credencials">
+                        <span>
+                            <span id="profile-wrapper-username">Username</span>
+                            <span id="profile-wrapper-age"></span>
+                        </span>
+                        <span id="profile-wrapper-location" style="font-weight: 100;">xd</span>
+                        <button id="main-page-edit-profile-button">Edit Profile</button>
+                    </span>
+                </div>
+                <div class="container-left-profile-inside">
+                    <h2>Favourite Song</h2>
+                    <input type="text" id="fav-song-artist" class="profile-input" placeholder="Favorite song artist" disabled/>
+                    <input type="text" id="fav-song-title" class="profile-input" placeholder="Favorite song title" disabled/>
+                    <h2>Favourite Artist</h2>
+                    <input type="text" id="fav-artist" class="profile-input" placeholder="Favourite artist" disabled/>
+                    <h2>Favourite Genres</h2>
+                    <div id="user-genres"></div>
+                </div>
+            </div>
+            <div class="main-page-profiles-conatiner">
+            </div>
+        </main>
     </body>
 </html>
