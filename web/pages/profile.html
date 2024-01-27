@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+    <script type="module" async>
+        import ProfilePage from '../src/script/profile.js'
+
+        const profile = new ProfilePage()
+    </script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>SONGEE</title>
+        <link rel="stylesheet" href="../styles/profile.css" />
+    </head>
+
+    <body>
+        <nav>
+            <div class="nav-adapter">
+                <button class="nav-button" id="home-page-button">
+                    <span class="material-icons">home</span>
+                </button>
+                <a class="nav-title">SONGEE</a>
+                <button class="nav-button" id="menu-button">
+                    <span class="material-icons">menu</span>
+                </button>
+                <custom-menu></custom-menu>
+            </div>
+        </nav>
+        <main>
+            <div class="container-left-profile">
+                <div class="profile-wrapper">
+                    <button class="edit-profile-button" id="home-page-button">
+                        <span class="material-icons">edit</span>
+                    </button>
+                    <img id="avatar" src="../../api/avatars/s-l1600.jpg"></img>
+                    <input type="file" id="avatar-input" hidden accept="image/*" />
+                    <span class="profile-wrapper-credencials">
+                        <span id="profile-wrapper-username">Username</span>
+                        <span id="profile-wrapper-age">Age</span>
+                    </span>
+                </div>
+                <div class="container-left-profile-inside">
+                    <h2>Favourite Song</h2>
+                    <input type="text" id="fav-song-artist" class="profile-input" placeholder="Favorite song artist" />
+                    <input type="text" id="fav-song-title" class="profile-input" placeholder="Favorite song title" />
+                    <h2>Favourite Artist</h2>
+                    <input type="text" id="fav-artist" class="profile-input" placeholder="Favourite artist" />
+                </div>
+            </div>
+            <div class="container-right-profile">
+                <h2>User Data</h2>
+                <input type="text" id="first-name" class="profile-input" placeholder="FIRST NAME" />
+                <input type="text" id="last-name" class="profile-input" placeholder="LAST NAME" />
+                <input type="text" id="location" class="profile-input" placeholder="LOCATION" />
+                <input type="text" id="age" class="profile-input" placeholder="AGE" />
+                <h2>Description</h2>
+                <textarea id="description" maxlength="1024" placeholder="DESCRIPTION"></textarea>
+                <h2>Favourite Genres</h2>
+                <div id="user-genres"></div>
+                <input type="text" id="genre-input" class="profile-input" placeholder="Search for genre..." style="margin: 0;"/>
+                <ul id="genres-list"></ul>
+                <button id="save-profile-data-button">SAVE DATA</button>
+            </div>
+        </main>
+    </body>
+</html>

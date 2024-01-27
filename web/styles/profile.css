@@ -1,0 +1,181 @@
+@import url('./index.css');
+
+.container-left-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60%;
+    height: fit-content;
+    border-radius: 25px;
+    background-color: #605943;
+    -webkit-box-shadow: inset 0px 0px 93px -38px rgba(0, 0, 0, 1);
+    -moz-box-shadow: inset 0px 0px 93px -38px rgba(0, 0, 0, 1);
+    box-shadow: inset 0px 0px 93px -38px rgba(0, 0, 0, 1);
+}
+
+.container-right-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    height: fit-content;
+    width: 40%;
+    border-radius: 25px;
+    background-color: #605943;
+    -webkit-box-shadow: inset 0px 0px 93px -38px rgba(0, 0, 0, 1);
+    -moz-box-shadow: inset 0px 0px 93px -38px rgba(0, 0, 0, 1);
+    box-shadow: inset 0px 0px 93px -38px rgba(0, 0, 0, 1);
+}
+
+.profile-input {
+    background-color: #9d7900;
+    -webkit-box-shadow: inset 0px 0px 40px -14px rgba(0, 0, 0, 1);
+    -moz-box-shadow: inset 0px 0px 40px -14px rgba(0, 0, 0, 1);
+    box-shadow: inset 0px 0px 40px -14px rgba(0, 0, 0, 1);
+    color: #ffffff;
+}
+
+.profile-input:focus {
+    -webkit-box-shadow: inset 0px 0px 40px -20px rgba(0, 0, 0, 1);
+    -moz-box-shadow: inset 0px 0px 40px -20px rgba(0, 0, 0, 1);
+    box-shadow: inset 0px 0px 40px -20px rgba(0, 0, 0, 1);
+}
+
+#avatar {
+    min-width: 150px;
+    width: 150px;
+    height: 150px;
+    background-size: cover;
+    background-position: top center;
+    border-radius: 50%;
+}
+
+.profile-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 20px;
+    gap: 20px;
+    width: calc(100% - 40px);
+    height: 160px;
+    background-color: #ffc300;
+    border-radius: 25px;
+}
+
+h2 {
+    font-weight: bold;
+    color: #ffc300;
+}
+
+textarea {
+    background-color: #9d7900;
+    -webkit-box-shadow: inset 0px 0px 40px -14px rgba(0, 0, 0, 1);
+    -moz-box-shadow: inset 0px 0px 40px -14px rgba(0, 0, 0, 1);
+    box-shadow: inset 0px 0px 40px -14px rgba(0, 0, 0, 1);
+    color: #ffffff;
+    width: 85%;
+    height: 80px;
+    border-radius: 25px;
+    border: 0;
+    padding: 20px;
+}
+
+.container-left-profile-inside {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: fit-content;
+    padding: 20px;
+}
+
+.edit-profile-button {
+    position: absolute;
+    top: 20px;
+    left: 120px;
+    background-color: #ffffff;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    border: none;
+    border-radius: 30px;
+    font-size: 15px;
+    font-weight: bold;
+    color: #9d7900;
+    transition: box-shadow 0.3s ease-in-out;
+    padding: 0;
+    margin: 0;
+}
+
+ul {
+    display: none;
+    background-color: #9d7900;
+    list-style-type: none;
+    margin: 0;
+    margin-bottom: 10px;
+    padding: 15px;
+    border-radius: 0px 0px 10px 10px;
+    width: 75%;
+    flex-direction: column;
+    gap: 15px;
+
+    li {
+        background-color: #ffc300;
+        color: #ffffff;
+        padding: 10px;
+        border-radius: 20px;
+        cursor: pointer;
+    }
+}
+
+.list-active {
+    display: flex !important;
+}
+
+#save-profile-data-button {
+    margin-top: 20px;
+}
+
+.genre-badge {
+    background-color: #ffc300;
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+#user-genres {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 0px 10px 10px 10px;
+}
+
+.profile-wrapper-credencials {
+    color: #ffffff;
+    font-size: 150%;
+    font-weight: bold;
+}
+
+@media only screen and (max-width: 1060px) {
+    main {
+        width: 100%;
+        flex-direction: column;
+        padding: 0px;
+        align-items: center;
+    }
+    .container-left-profile {
+        margin-top: 20px;
+        width: 95%;
+    }
+    .container-right-profile {
+        width: 95%;
+        padding: 0px;
+        margin-bottom: 20px;
+    }
+}

@@ -1,15 +1,14 @@
 import ApiCall from './apiCall.js'
 
-export default class getServerProps extends ApiCall {
-    constructor(url, body) {
-        super(url, 'GET', body)
-        this.user = {}
+export default class getServerProps  {
+    constructor() {
+        this.token = window.localStorage.getItem('token')
         this.err = []
-        this.getUserData()
     }
 
     async getUserData() {
-        let res = await fetch('http://localhost:8080/api/user/getData', {
+        let res 
+        await fetch('http://localhost:8080/api/user/getData', {
             method: 'GET',
             headers: {
                 Authorization: 'Berear ' + this.token,
@@ -18,6 +17,7 @@ export default class getServerProps extends ApiCall {
         })
             .then((response) => response.json())
             .then((data) => {
+                res = data.res
                 if (data.message == 'UNAUTHORIZED') {
                     window.localStorage.removeItem('token')
                     window.location.reload()
@@ -26,5 +26,6 @@ export default class getServerProps extends ApiCall {
             .catch((error) => {
                 console.error(error)
             })
+        return res
     }
 }

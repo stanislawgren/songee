@@ -6,7 +6,6 @@ export default class CustomMenu extends HTMLElement {
     }
 
     connectedCallback() {
-        console.log('Custom element added to page.')
         const shadowRoot = this.attachShadow({ mode: 'open' })
         const style = document.createElement('style')
 
@@ -21,6 +20,9 @@ export default class CustomMenu extends HTMLElement {
         const userProfileButton = document.createElement('button')
         userProfileButton.textContent = 'Profile'
         userProfileButton.classList.add('custom-menu-button')
+        userProfileButton.addEventListener('click', () => {
+            window.location.href = new DevManager().get() + 'profile.html'
+        })
 
         style.textContent = `
             .custom-menu-button {
@@ -42,7 +44,6 @@ export default class CustomMenu extends HTMLElement {
             `
 
         shadowRoot.appendChild(style)
-        console.log(style.isConnected)
         shadowRoot.appendChild(userProfileButton)
         shadowRoot.appendChild(logoutButton)
     }

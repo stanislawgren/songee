@@ -1,6 +1,9 @@
 const http = require('http')
 const router = require('./handlers/routerHandler')
 const Authorization = require('./handlers/authorize.js')
+const formidable = require('formidable')
+const path = require('path')
+const fs = require('fs')
 class Server {
     #server = this.#handleServer()
     #authorized = false
@@ -24,8 +27,9 @@ class Server {
                 response.end('ok')
                 return
             }
+            let result
 
-            console.log(request.url.includes('/api/user/login' && '/api/user/register'))
+            let body = ''
 
             if (request.url != '/api/user/login' && request.url != '/api/user/register') {
                 const authorized = await new Authorization(request.headers['authorization'], response).authorize()
@@ -35,17 +39,34 @@ class Server {
                     return
                 }
             }
-            let body = ''
+
+            if (request.url.includes('/api/file')) {
+                const form = new formidable.IncomingForm()
+                let newPath
+                form.parse(request, function (err, fields, files) {
+                    let oldPath = files.file[0].filepath
+
+                    newPath = path.join(__dirname, 'avatars', fields.username[0] + "_avatar.png" )
+                    let rawData = fs.readFileSync(oldPath)
+
+                    fs.rename(oldPath, newPath, function (err) {
+                        if (err) console.error(err)
+                    })
+                })
+
+            }
+
             request
                 .on('error', (err) => {
                     response.writeHead(500)
                     response.end(`Server error: ${err}`)
                 })
                 .on('data', (chunk) => {
-                    body += chunk
+                    if(request.url.includes('/api/file')) body = ''
+                    else body += chunk
                 })
                 .on('end', () => {
-                    new router(request, response, 'xd', body)
+                    new router(request, response, request.headers['authorization'].split(' ')[1], body)
                 })
         })
 
