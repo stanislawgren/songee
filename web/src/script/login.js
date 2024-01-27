@@ -1,7 +1,7 @@
-import ApiCall from '../utils/apiCall.js'
 import DevManager from '../../DevManager.js'
 import AlertBox from '../utils/AlertBox.js'
 import InputHandler from '../utils/InputHandler.js'
+import UserService from '../services/userService.js'
 
 export default class LoginPage {
     document = document
@@ -14,6 +14,8 @@ export default class LoginPage {
         if (this.#token) {
             window.location.href = this.path + 'index.html'
         }
+
+        this.userService = new UserService()
 
         this.handleHTML()
     }
@@ -41,13 +43,7 @@ export default class LoginPage {
         const login = document.getElementById('username').value
         const password = document.getElementById('password').value
 
-        let res
-
-        await new ApiCall('/user/login', 'POST', { username: login, password: password })
-            .call()
-            .then((response) => response.json())
-            .then((data) => (res = data))
-            .catch((error) => console.error(error))
+        let res = await this.userService.login(login, password)
 
         if (res.error) {
             new AlertBox(res.error)

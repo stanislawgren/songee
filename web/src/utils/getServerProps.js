@@ -20,7 +20,7 @@ export default class getServerProps  {
                 res = data.res
                 if (data.message == 'UNAUTHORIZED') {
                     window.localStorage.removeItem('token')
-                    // window.location.reload()
+                    window.location.reload()
                 }
             })
             .catch((error) => {

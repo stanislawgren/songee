@@ -1,6 +1,8 @@
 import pageClass from '../utils/pageClass.js'
 import ApiCall from '../utils/apiCall.js'
 import AlertBox from '../utils/AlertBox.js'
+import PageService from '../services/pageService.js'
+import FileService from '../services/fileService.js'
 
 export default class ProfilePage extends pageClass {
     user = {
@@ -19,21 +21,13 @@ export default class ProfilePage extends pageClass {
 
     constructor() {
         super()
+        this.pageService = new PageService()
+        this.fileService = new FileService()
         this.handleHTML()
     }
 
-    async getPageData() {
-        let res
-        await new ApiCall('/page/getProfilePage', 'GET', {})
-            .call()
-            .then((response) => response.json())
-            .then((data) => (res = data))
-            .catch((error) => console.error(error))
-        return res
-    }
-
     async handleHTML() {
-        const pageData = await this.getPageData()
+        const pageData = await this.pageService.getPageData()
 
         for (let i = 0; i < pageData.res.length; i++) {
             this.genres.push(pageData.res[i].name)
@@ -187,26 +181,7 @@ export default class ProfilePage extends pageClass {
         const file = fileInput.files[0]
 
         if (file) {
-            const formData = new FormData()
-            formData.append('file', file)
-            formData.append('username', this.user.username)
-
-            console.log(formData.get('file'))
-
-            await fetch('http://localhost:8080/api/file/avatarUpload', {
-                method: 'POST',
-                headers: {
-                    Authorization: 'Berear ' + this.token,
-                },
-                body: formData,
-            })
-                .then((response) => response.json())
-                .then((data) => {
-                    console.log('Server response:', data)
-                })
-                .catch((error) => {
-                    console.error('Error during file upload:', error)
-                })
+            this.fileService.uploadFile({ file: file, username: this.user.username })
         } else {
             console.warn('No file selected.')
         }

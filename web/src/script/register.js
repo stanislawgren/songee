@@ -1,7 +1,7 @@
-import ApiCall from '../utils/apiCall.js'
 import DevManager from '../../DevManager.js'
 import InputHandler from '../utils/InputHandler.js'
 import AlertBox from '../utils/AlertBox.js'
+import UserService from '../services/userService.js'
 
 export default class RegisterPage {
     document = document
@@ -14,6 +14,7 @@ export default class RegisterPage {
         if (this.#token) {
             window.location.href = this.path + 'index.html'
         }
+        this.userService = new UserService()
 
         this.handleHTML()
     }
@@ -53,13 +54,7 @@ export default class RegisterPage {
             return
         }
 
-        let res
-
-        await new ApiCall('/user/register', 'POST', { username: username, password: password, mail: mail })
-            .call()
-            .then((response) => response.json())
-            .then((data) => (res = data))
-            .catch((error) => console.error(error))
+        let res = await this.userService.register(username, password, mail)
 
         if (res.error) {
             new AlertBox(res.error)
