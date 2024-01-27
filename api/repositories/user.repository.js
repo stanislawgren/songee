@@ -47,11 +47,12 @@ user.getUserData = async (client, { username }) => {
 
 user.updateUserProfile = async (
     client,
-    { id, firstName, lastName, location, description, age, favouriteSongArtist, favouriteSongTitle, favouriteArtist }
+    { id, firstName, lastName, location, description, age, favouriteSongArtist, favouriteSongTitle, favouriteArtist, gender }
 ) => {
+    console.log(gender)
     return new Promise((resolve, reject) => {
         client.query(
-            `UPDATE songee_schema.user_profiles SET first_name = $1, last_name = $2, location = $3, description = $4, age = $5, favourite_song_artist = $6, favourite_song_title = $7, favourite_artist = $8 WHERE user_id = $9`,
+            `UPDATE songee_schema.user_profiles SET first_name = $1, last_name = $2, location = $3, description = $4, age = $5, favourite_song_artist = $6, favourite_song_title = $7, favourite_artist = $8, gender = $9 WHERE user_id = $10`,
             [
                 firstName,
                 lastName,
@@ -61,6 +62,7 @@ user.updateUserProfile = async (
                 favouriteSongArtist,
                 favouriteSongTitle,
                 favouriteArtist,
+                gender,
                 id,
             ],
             (err, res) => {

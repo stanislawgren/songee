@@ -37,7 +37,7 @@ export default class ProfilePage extends pageClass {
         }
 
         this.user = { ...(await this.getUserData()) }
-        
+
         document.getElementById('first-name').value = this.user.first_name
         document.getElementById('last-name').value = this.user.last_name
         document.getElementById('location').value = this.user.location
@@ -46,6 +46,14 @@ export default class ProfilePage extends pageClass {
         document.getElementById('fav-song-title').value = this.user.favourite_song_title
         document.getElementById('fav-song-artist').value = this.user.favourite_song_artist
         document.getElementById('fav-artist').value = this.user.favourite_artist
+
+        if(this.user.gender == 'm') {
+            document.getElementsByName('gender')[0].checked = true
+            document.getElementsByName('gender')[1].checked = false
+        } else {
+            document.getElementsByName('gender')[0].checked = false
+            document.getElementsByName('gender')[1].checked = true
+        }
 
         const profileWarpperUsername = document.getElementById('profile-wrapper-username')
         if (this.user.first_name) {
@@ -101,6 +109,8 @@ export default class ProfilePage extends pageClass {
         const favouriteSongArtist = document.getElementById('fav-song-artist').value
         const favouriteArtist = document.getElementById('fav-artist').value
 
+        const gender = document.getElementsByName('gender')[0].checked ? 'm' : 'f'
+
         let res
         await new ApiCall('/user/updateProfile', 'POST', {
             id: this.user.user_id,
@@ -113,6 +123,7 @@ export default class ProfilePage extends pageClass {
             favouriteSongArtist: favouriteSongArtist,
             favouriteSongTitle: favouriteSongTitle,
             favouriteArtist: favouriteArtist,
+            gender: gender,
         })
             .call()
             .then((response) => response.json())
