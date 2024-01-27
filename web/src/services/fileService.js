@@ -8,8 +8,6 @@ export default class FileService {
         formData.append('file', file)
         formData.append('username', username)
 
-        console.log(formData.get('file'))
-
         await fetch('http://localhost:8080/api/file/avatarUpload', {
             method: 'POST',
             headers: {

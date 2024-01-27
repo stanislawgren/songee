@@ -42,6 +42,7 @@
 }
 
 #avatar {
+    min-width: 150px;
     width: 150px;
     height: 150px;
     background-size: cover;
@@ -159,4 +160,22 @@ ul {
     color: #ffffff;
     font-size: 150%;
     font-weight: bold;
+}
+
+@media only screen and (max-width: 1060px) {
+    main {
+        width: 100%;
+        flex-direction: column;
+        padding: 0px;
+        align-items: center;
+    }
+    .container-left-profile {
+        margin-top: 20px;
+        width: 95%;
+    }
+    .container-right-profile {
+        width: 95%;
+        padding: 0px;
+        margin-bottom: 20px;
+    }
 }

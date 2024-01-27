@@ -11,10 +11,6 @@ module.exports = class FileController {
         const decryptedToken = encrypt.decryptData(xtoken).split('&')
         const client = await getClient()
 
-        console.log()
-
-        console.log(decryptedToken)
-
         let res
         try {
             res = await fileRepository.updateUserAvatar(client, {

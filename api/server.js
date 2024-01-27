@@ -44,14 +44,13 @@ class Server {
                 const form = new formidable.IncomingForm()
                 let newPath
                 form.parse(request, function (err, fields, files) {
-                    console.log()
                     let oldPath = files.file[0].filepath
 
                     newPath = path.join(__dirname, 'avatars', fields.username[0] + "_avatar.png" )
                     let rawData = fs.readFileSync(oldPath)
 
                     fs.rename(oldPath, newPath, function (err) {
-                        if (err) console.log(err)
+                        if (err) console.error(err)
                     })
                 })
 

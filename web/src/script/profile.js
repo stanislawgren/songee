@@ -14,6 +14,9 @@ export default class ProfilePage extends pageClass {
         description: '',
         age: '',
         location: '',
+        favourite_song_title: '',
+        favourite_song_artist: '',
+        favourite_artist: '',
         genres: [],
     }
 
@@ -34,12 +37,15 @@ export default class ProfilePage extends pageClass {
         }
 
         this.user = { ...(await this.getUserData()) }
-        console.log(this.user)
+        
         document.getElementById('first-name').value = this.user.first_name
         document.getElementById('last-name').value = this.user.last_name
         document.getElementById('location').value = this.user.location
         document.getElementById('description').value = this.user.description
         document.getElementById('age').value = this.user.age
+        document.getElementById('fav-song-title').value = this.user.favourite_song_title
+        document.getElementById('fav-song-artist').value = this.user.favourite_song_artist
+        document.getElementById('fav-artist').value = this.user.favourite_artist
 
         const profileWarpperUsername = document.getElementById('profile-wrapper-username')
         if (this.user.first_name) {
@@ -72,7 +78,6 @@ export default class ProfilePage extends pageClass {
 
         editButton.addEventListener('click', (e) => {
             e.preventDefault()
-            console.log(fileInput)
             fileInput.click()
         })
 
@@ -92,7 +97,10 @@ export default class ProfilePage extends pageClass {
         const location = document.getElementById('location').value
         const descrition = document.getElementById('description').value
         const age = document.getElementById('age').value
-        console.log(this.user)
+        const favouriteSongTitle = document.getElementById('fav-song-title').value
+        const favouriteSongArtist = document.getElementById('fav-song-artist').value
+        const favouriteArtist = document.getElementById('fav-artist').value
+
         let res
         await new ApiCall('/user/updateProfile', 'POST', {
             id: this.user.user_id,
@@ -102,6 +110,9 @@ export default class ProfilePage extends pageClass {
             description: descrition,
             age: age,
             genres: this.user.genres,
+            favouriteSongArtist: favouriteSongArtist,
+            favouriteSongTitle: favouriteSongTitle,
+            favouriteArtist: favouriteArtist,
         })
             .call()
             .then((response) => response.json())
@@ -133,7 +144,6 @@ export default class ProfilePage extends pageClass {
     }
 
     handleGenres(value) {
-        console.log(value)
         if (this.user.genres.includes(value)) {
             let index = this.user.genres.indexOf(value)
             if (index !== -1) {
@@ -147,7 +157,6 @@ export default class ProfilePage extends pageClass {
     }
 
     async genreSearch(value) {
-        console.log(this.user.genres)
         const lista = document.getElementById('genres-list')
         const genre = document.getElementById('genres-list')
         lista.innerHTML = ''
@@ -177,7 +186,6 @@ export default class ProfilePage extends pageClass {
 
     async uploadFile() {
         const fileInput = document.getElementById('avatar-input')
-        console.log(fileInput)
         const file = fileInput.files[0]
 
         if (file) {

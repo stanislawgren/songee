@@ -2,7 +2,6 @@ const fs = require('fs')
 const xpath = require('path')
 
 const getHandler = (response, url) => {
-    console.log(url)
     let dotoffset = url.lastIndexOf('.')
     let mimetype =
         dotoffset == -1

@@ -45,11 +45,24 @@ user.getUserData = async (client, { username }) => {
     })
 }
 
-user.updateUserProfile = async (client, { id, firstName, lastName, location, description, age }) => {
+user.updateUserProfile = async (
+    client,
+    { id, firstName, lastName, location, description, age, favouriteSongArtist, favouriteSongTitle, favouriteArtist }
+) => {
     return new Promise((resolve, reject) => {
         client.query(
-            `UPDATE songee_schema.user_profiles SET first_name = $1, last_name = $2, location = $3, description = $4, age = $5 WHERE user_id = $6`,
-            [firstName, lastName, location, description, age, id],
+            `UPDATE songee_schema.user_profiles SET first_name = $1, last_name = $2, location = $3, description = $4, age = $5, favourite_song_artist = $6, favourite_song_title = $7, favourite_artist = $8 WHERE user_id = $9`,
+            [
+                firstName,
+                lastName,
+                location,
+                description,
+                age,
+                favouriteSongArtist,
+                favouriteSongTitle,
+                favouriteArtist,
+                id,
+            ],
             (err, res) => {
                 if (err) {
                     reject(err)
@@ -83,7 +96,6 @@ user.updateUserGenres = async (client, { id, genres }) => {
             if (err) {
                 reject(err)
             } else {
-                console.log(genres)
                 genres.forEach((genre) => {
                     client.query(
                         `INSERT INTO songee_schema.users_genres (user_id, genres_id) VALUES ($1, $2)`,

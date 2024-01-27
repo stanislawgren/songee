@@ -16,8 +16,6 @@ module.exports = class PageController {
             return { error: 'SERVER_ERROR' }
         }
 
-        console.log(res)
-
         return { message: 'OK', res: res }
     }
 }

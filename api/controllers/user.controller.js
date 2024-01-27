@@ -109,7 +109,7 @@ module.exports = class UserController {
     async updateProfile(data, token) {
         const client = await getClient()
         let parsedData = JSON.parse(data)
-        console.log(parsedData)
+        
         let genres
         try {
             genres = await pageRepository.getGenres(client)
@@ -128,7 +128,6 @@ module.exports = class UserController {
         try {
             await userRepository.updateUserGenres(client, { id: parsedData.id, genres: genresToInsert })
         } catch (error) {
-            console.log(error)
             return { error: 'SERVER_ERROR' }
         }
 
