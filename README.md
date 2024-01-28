@@ -94,11 +94,13 @@ User data is stored in a relational database.
 Here You can login or register to access our page.
 
 - Desktop
+  
   ![image](https://github.com/stanislawgren/songee/assets/74272783/dc8c41d5-728f-4025-856c-c05a278a8e52)
 
   ![image](https://github.com/stanislawgren/songee/assets/74272783/234e234c-c9a7-4fef-9c0e-4b5601041830)
 
 - Mobile
+  
   ![image](https://github.com/stanislawgren/songee/assets/74272783/6b63979b-93f2-4ace-9c1d-7150e22d82da)
 
   ![image](https://github.com/stanislawgren/songee/assets/74272783/efc0488d-9c00-421b-a90b-d5512b39ddcf)
@@ -108,9 +110,11 @@ Here You can login or register to access our page.
 On this page You can customize Your profile. Your profile will be visible for other only if You provide all data.
 
 - Desktop
+  
   ![image](https://github.com/stanislawgren/songee/assets/74272783/118cf005-d844-4a2f-9b39-d3bcaf0485b1)
 
 - Mobile
+  
   ![image](https://github.com/stanislawgren/songee/assets/74272783/972f5fae-ed87-45a1-a763-e36250219f2e)
 
 ### 3. Main Page
@@ -118,9 +122,11 @@ On this page You can customize Your profile. Your profile will be visible for ot
 On this page You can swipe other profiles, if someone likes You and You like him back, You will be matched!
 
 - Desktop
+  
   ![image](https://github.com/stanislawgren/songee/assets/74272783/3c12f657-4144-4237-a88f-3d036120de9a)
 
 - Mobile
+  
   ![image](https://github.com/stanislawgren/songee/assets/74272783/dd438872-68dd-45a3-9118-c91386749876)
 
 ### 4. Chat Page
@@ -128,6 +134,7 @@ On this page You can swipe other profiles, if someone likes You and You like him
 On this page in feature, You will be able to talk with Your pairs, for now, there are only pairs displayed.
 
 - Desktop
+  
   ![image](https://github.com/stanislawgren/songee/assets/74272783/6c54a998-c1aa-4caa-b54e-b455d610e719)
 
 
