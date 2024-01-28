@@ -87,7 +87,7 @@ User data is stored in a relational database.
 2. Stop web and api containers
 
 3. Change `DevManager.js` to dev
-    - (WARNING! There is a chance that You will have to change ports that You are using for front-end Live-Server, if you need to, change them in `DevManager.js` and `api/sever.js`
+    - (WARNING! There is a chance that You will have to change ports that You are using for front-end Live-Server, if you need to, change them in `DevManager.js` and `api/sever.js`)
 
 5. Run Live-Server for front-end
 
@@ -140,7 +140,7 @@ On this page You can swipe other profiles, if someone likes You and You like him
 
 ### 4. Chat Page
 
-On this page in feature, You will be able to talk with Your pairs, for now, there are only pairs displayed.
+On this page in future, You will be able to talk with Your pairs, for now, there are only pairs displayed.
 
 - Desktop
   
