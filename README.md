@@ -63,13 +63,22 @@ User data is stored in a relational database.
 ```bash
     npm install
 ```
-4. Docker setup: each service has Dockerfile added, docker-compose is already configured, all will be solved by one command. (Database will be seeded automatically)
+
+4. Add `.env` file to `api`. You need to specify some variables to make Your code run:
+
+   ```bash
+       ENCRYPTION_METHOD='aes-128-cbc'
+       SECRET_KEY='your-secret-key'
+       SECRET_IV='your-secret-iv'
+   ```
+
+5. Docker setup: each service has Dockerfile added, docker-compose is already configured, all will be solved by one command. (Database will be seeded automatically)
 
 ```bash
     docker compose up -d
 ```
 
-5. Access: You can access Your app by `localhost:3000`
+6. Access: You can access Your app by `localhost:3000`
 
 ### For dev purposes
 
