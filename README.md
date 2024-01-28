@@ -42,7 +42,12 @@ User data is stored in a relational database.
 
 1. ERD
 
-2. Database Dump
+   ![image](https://github.com/stanislawgren/songee/assets/74272783/efabc5d9-cbca-4524-8cae-180f49e53dc2)
+
+3. Database Dump
+
+    Database dump is avaliable in `db/init.sql`
+   
 ## Installation
 
 1. Clone repository
