@@ -1,15 +1,10 @@
-export default class pageClass {
-    perms = {
-        1: 'user',
-        2: 'mod',
-        4: 'admin',
-    }
+export default class permissionsCheck {
 
     constructor() {
         this.token = window.localStorage.getItem('token')
     }
 
-    async check() {
+    async check(requiredPermissions) {
         let res
         await fetch('http://localhost:8080/api/user/getData', {
             method: 'GET',
@@ -30,25 +25,28 @@ export default class pageClass {
                 console.error(error)
             })
 
-        let num = res.permissions
+        let userPermissions = res.permissions
 
-        const binaryRepresentation = [] 
+        const sum = 0
+        const required = requiredPermissions.reduce((accumulator, require) => accumulator + require, sum)
+        let binaryUser = parseInt(userPermissions).toString(2)
+        let binaryRequired = parseInt(required).toString(2)
 
-        while (num > 0) {
-            binaryRepresentation.unshift(num & 1) 
-            num >>= 1 
+        while (binaryUser.length != binaryRequired.length) {
+            if (binaryUser.length < binaryRequired.length) {
+                binaryUser = '0' + binaryUser
+            } else {
+                binaryRequired = '0' + binaryRequired
+            }
+        }
+        let authenticationSuccess = false
+
+        for (let i = 0; i < binaryUser.length; i++) {
+            if (binaryUser[i] == binaryRequired[i] && binaryUser[i] == '1') {
+                authenticationSuccess = true
+            }
         }
 
-        const mappedNames = binaryRepresentation
-            .map((binaryDigit, index) => {
-                if (binaryDigit === 1) {
-                    const powerOfTwo = Math.pow(2, index)
-                    return this.perms[powerOfTwo]
-                }
-            })
-            .filter(Boolean) 
-
-
-        return mappedNames
+        return authenticationSuccess
     }
 }

@@ -1,13 +1,18 @@
 import DevManager from '../../DevManager.js'
 import permissionsCheck from '../utils/permissionsCheck.js'
+import permissions from '../utils/permissions.js'
 
 export default class CustomMenu extends HTMLElement {
+    permissionValues = new permissions().get()
+
     constructor() {
         super()
     }
 
     async connectedCallback() {
-        let permissions = await new permissionsCheck().check()
+        let permissions = await new permissionsCheck()
+        permissions = await permissions.check([this.permissionValues.admin])
+        console.log(permissions)
 
         const shadowRoot = this.attachShadow({ mode: 'open' })
         const style = document.createElement('style')
@@ -34,7 +39,7 @@ export default class CustomMenu extends HTMLElement {
             window.location.href = new DevManager().get() + 'settings.html'
         })
 
-        if (permissions.includes('admin')) {
+        if (permissions) {
             const adminButton = document.createElement('button')
             adminButton.textContent = 'Admin Panel'
             adminButton.classList.add('custom-menu-button')
