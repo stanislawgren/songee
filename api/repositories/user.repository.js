@@ -257,4 +257,16 @@ user.addDislike = async (client, { user_id, user_id_2 }) => {
     })
 }
 
+user.getPairProfile = async (client, { user_id }) => {
+    return new Promise((resolve, reject) => {
+        client.query(`SELECT * FROM songee.songee_schema.user_profiles WHERE user_id = $1`, [user_id], (err, res) => {
+            if (err) {
+                reject(err)
+            } else {
+                resolve(res.rows)
+            }
+        })
+    })
+}
+
 module.exports = user

@@ -1,11 +1,14 @@
 import DevManager from '../../DevManager.js'
+import permissionsCheck from '../utils/permissionsCheck.js'
 
 export default class CustomMenu extends HTMLElement {
     constructor() {
         super()
     }
 
-    connectedCallback() {
+    async connectedCallback() {
+        let permissions = await new permissionsCheck().check()
+
         const shadowRoot = this.attachShadow({ mode: 'open' })
         const style = document.createElement('style')
 
@@ -30,6 +33,16 @@ export default class CustomMenu extends HTMLElement {
         settingsButton.addEventListener('click', () => {
             window.location.href = new DevManager().get() + 'settings.html'
         })
+
+        if (permissions.includes('admin')) {
+            const adminButton = document.createElement('button')
+            adminButton.textContent = 'Admin Panel'
+            adminButton.classList.add('custom-menu-button')
+            adminButton.addEventListener('click', () => {
+                window.location.href = new DevManager().get() + 'adminPanel.html'
+            })
+            shadowRoot.appendChild(adminButton)
+        }
 
         const chatButton = document.createElement('button')
         chatButton.textContent = 'Chat'
@@ -58,6 +71,7 @@ export default class CustomMenu extends HTMLElement {
             `
 
         shadowRoot.appendChild(style)
+
         shadowRoot.appendChild(userProfileButton)
         shadowRoot.appendChild(chatButton)
         shadowRoot.appendChild(settingsButton)

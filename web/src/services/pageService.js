@@ -10,4 +10,14 @@ export default class PageService {
             .catch((error) => console.error(error))
         return res
     }
+
+    async getChatPageData() {
+        let res
+        await new ApiCall('/page/getChatPage', 'GET', {})
+            .call()
+            .then((response) => response.json())
+            .then((data) => (res = data))
+            .catch((error) => console.error(error))
+        return res
+    }
 }
