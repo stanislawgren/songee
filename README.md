@@ -6,8 +6,10 @@ SONGEE is more than just a dating app; it's a platform that harnesses the power 
 ## Table of contents
 
 1. [Features](#features)
-2. [Tech Stack](#tech)
-3. [Database Structure](#database)
+2. [Tech Stack](#tech-stack)
+3. [Database Structure](#database-structure)
+4. [Installation](#installation)
+5. [Usage/Examples](#usage/examples)
 
 ## Features
 
