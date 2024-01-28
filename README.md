@@ -82,6 +82,7 @@ User data is stored in a relational database.
 4. Run Live-Server for front-end
 
 5. Run `npm start` for back-end
+   - nodeamon should be installed
 
 
     
