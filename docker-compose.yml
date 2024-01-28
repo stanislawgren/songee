@@ -7,6 +7,8 @@ services:
             dockerfile: ./api/Dockerfile
         ports:
             - 8080:8080
+        volumes:
+            - .:/app
     # db:
     #     image: db
     #     container_name: songee-db
@@ -25,3 +27,8 @@ services:
             dockerfile: ./web/Dockerfile
         ports:
             - 3000:3000
+        volumes:
+            - .:/app
+
+volumes:
+    db-data:

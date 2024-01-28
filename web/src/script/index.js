@@ -36,8 +36,6 @@ export default class indexPage extends pageClass {
 
         this.users = await this.getUsers()
 
-        console.log(this.users)
-
         this.users.forEach((user) => {
             this.generateProfile(
                 user.first_name,

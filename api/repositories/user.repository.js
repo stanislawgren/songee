@@ -33,7 +33,6 @@ user.getUserData = async (client, { username }) => {
             [username],
             (err, res) => {
                 if (err) {
-                    console.log(err)
                     reject(err)
                 } else if (res.rows[0] == undefined) {
                     reject('USER_NOT_FOUND')
@@ -169,7 +168,6 @@ user.getUsersProfiles = async (client, { user_id, gender }) => {
             [user_id, gender],
             (err, res) => {
                 if (err) {
-                    console.log(err)
                     reject(err)
                 } else {
                     resolve(res.rows)
@@ -254,6 +252,18 @@ user.addDislike = async (client, { user_id, user_id_2 }) => {
                 }
             }
         )
+    })
+}
+
+user.getPairProfile = async (client, { user_id }) => {
+    return new Promise((resolve, reject) => {
+        client.query(`SELECT * FROM songee.songee_schema.user_profiles WHERE user_id = $1`, [user_id], (err, res) => {
+            if (err) {
+                reject(err)
+            } else {
+                resolve(res.rows)
+            }
+        })
     })
 }
 

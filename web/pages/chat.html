@@ -1,13 +1,16 @@
 <!doctype html>
 <html lang="en">
     <script type="module" async>
+        import ChatPage from '../src/script/chat.js'
+
+        const chat = new ChatPage()
     </script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>SONGEE</title>
-        <link rel="stylesheet" href="../styles/mainPage.css" />
+        <link rel="stylesheet" href="../styles/chat.css" />
     </head>
 
     <body>
@@ -23,5 +26,11 @@
                 <custom-menu></custom-menu>
             </div>
         </nav>
+        <main>
+            <div class="chat-container">
+                <div class="chat-container-profiles"></div>
+                <div class="chat-container-messages">SOON</div>
+            </div>
+        </main>
     </body>
-    </html>
+</html>

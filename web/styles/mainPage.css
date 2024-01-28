@@ -58,13 +58,13 @@
     transition: all 0.3s ease-in-out;
 }
 
-.main-page-profile-container-liked{
+.main-page-profile-container-liked {
     left: 200px;
     opacity: 0;
     transition: all 0.3s ease-in-out;
 }
 
-.main-page-profile-container-disliked{
+.main-page-profile-container-disliked {
     left: -200px;
     opacity: 0;
     transition: all 0.3s ease-in-out;
@@ -128,10 +128,19 @@
     margin: 10px 10px 0px 10px;
 }
 
-
+.span-colors {
+    color: #ffb800;
+    font-size: 200%;
+    text-align: center;
+}
 
 @media only screen and (max-width: 1060px) {
     .container-left-profile {
         display: none;
+    }
+    .main-page-profiles-conatiner {
+        left: -20px;
+        width: 85%;
+        margin-top: 20px;
     }
 }
