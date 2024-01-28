@@ -61,12 +61,14 @@
 .main-page-profile-container-liked {
     left: 200px;
     opacity: 0;
+    transform: rotate(20deg);
     transition: all 0.3s ease-in-out;
 }
 
 .main-page-profile-container-disliked {
     left: -200px;
     opacity: 0;
+    transform: rotate(-20deg);
     transition: all 0.3s ease-in-out;
 }
 

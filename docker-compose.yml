@@ -9,18 +9,18 @@ services:
             - 8080:8080
         volumes:
             - .:/app
-    # db:
-    #     image: db
-    #     container_name: songee-db
-    #     build:
-    #         context: .
-    #         dockerfile: ./db/Dockerfile
-    #     environment:
-    #         - POSTGRES_USER=root
-    #         - POSTGRES_PASSWORD=root
-    #         - POSTGRES_DB=songee
-    #     ports:
-    #         - 5432:5432
+    db:
+        image: db
+        container_name: songee-db
+        build:
+            context: .
+            dockerfile: ./db/Dockerfile
+        environment:
+            - POSTGRES_USER=root
+            - POSTGRES_PASSWORD=root
+            - POSTGRES_DB=songee
+        ports:
+            - 5432:5432
     web:
         container_name: songee-web
         build:
