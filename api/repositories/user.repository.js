@@ -33,7 +33,6 @@ user.getUserData = async (client, { username }) => {
             [username],
             (err, res) => {
                 if (err) {
-                    console.log(err)
                     reject(err)
                 } else if (res.rows[0] == undefined) {
                     reject('USER_NOT_FOUND')
@@ -169,7 +168,6 @@ user.getUsersProfiles = async (client, { user_id, gender }) => {
             [user_id, gender],
             (err, res) => {
                 if (err) {
-                    console.log(err)
                     reject(err)
                 } else {
                     resolve(res.rows)

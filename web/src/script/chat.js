@@ -11,9 +11,16 @@ export default class ChatPage extends pageClass {
 
     async handleHTML() {
         let res = await this.pageService.getChatPageData()
-        console.log(res)
+
         for (let i = 0; i < res.res.length; i++) {
             let userCard = this.generateUserCard(res.res[i])
+            document.getElementsByClassName('chat-container-profiles')[0].appendChild(userCard)
+        }
+
+        if (res.res.length == 0) {
+            let userCard = document.createElement('div')
+            userCard.classList.add('user-card')
+            userCard.innerText = 'No pairs found'
             document.getElementsByClassName('chat-container-profiles')[0].appendChild(userCard)
         }
 
@@ -26,7 +33,6 @@ export default class ChatPage extends pageClass {
         userCard.classList.add('user-card')
         userCard.addEventListener('click', () => {
             let userCardSelected = document.getElementsByClassName('user-card-selected')
-            console.log(userCardSelected)
 
             for (let i = 0; i < userCardSelected.length; i++) {
                 userCardSelected[i].classList.remove('user-card-selected')

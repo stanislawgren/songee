@@ -12,7 +12,6 @@ export default class CustomMenu extends HTMLElement {
     async connectedCallback() {
         let permissions = await new permissionsCheck()
         permissions = await permissions.check([this.permissionValues.admin])
-        console.log(permissions)
 
         const shadowRoot = this.attachShadow({ mode: 'open' })
         const style = document.createElement('style')

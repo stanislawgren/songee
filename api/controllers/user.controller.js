@@ -152,7 +152,6 @@ module.exports = class UserController {
         try {
             user = await userRepository.getUserData(client, { username: decryptedToken[0] })
         } catch (error) {
-            console.log(error)
             return { error: 'SERVER_ERROR' }
         }
 
@@ -170,8 +169,6 @@ module.exports = class UserController {
             likes.push(element.liked_id)
         })
 
-        console.log(likes)
-
         try {
             users = await userRepository.getUsersProfiles(client, { user_id: user.user_id, gender: user.gender })
         } catch (error) {
@@ -181,7 +178,6 @@ module.exports = class UserController {
         let usersToDelete = []
 
         users.forEach((user, index) => {
-            console.log(likes.includes(user.user_id))
             if (likes.includes(user.user_id)) {
                 usersToDelete.push(user)
             }
@@ -189,12 +185,8 @@ module.exports = class UserController {
 
         usersToDelete.forEach((user) => {
             const arrIndex = users.indexOf(user)
-            console.log(arrIndex)
             users.splice(arrIndex, 1)
         })
-
-        console.log(users)
-
         return { message: 'OK', res: users }
     }
 
@@ -203,12 +195,8 @@ module.exports = class UserController {
 
         let parsedData = JSON.parse(data)
 
-        console.log(parsedData.userId)
-
         const encrypt = new Encrypt()
         const decryptedToken = encrypt.decryptData(token).split('&')
-
-        console.log(decryptedToken[2])
 
         let likeCheck
 
@@ -218,41 +206,29 @@ module.exports = class UserController {
                 liked_id: decryptedToken[2],
             })
         } catch (error) {
-            console.error(error)
+            return { error: 'SERVER_ERROR' }
         }
 
         let res
 
-        console.log(likeCheck)
+        try {
+            res = await userRepository.addLike(client, { user_id: decryptedToken[2], liked_id: parsedData.userId })
+        } catch (error) {
+            return { error: 'SERVER_ERROR' }
+        }
 
-        if (likeCheck.msg) {
-            try {
-                res = await userRepository.addLike(client, { user_id: decryptedToken[2], liked_id: parsedData.userId })
-            } catch (error) {
-                console.log(error)
-                return { error: 'SERVER_ERROR' }
-            }
-        } else if (likeCheck.value == 1) {
-            try {
-                res = await userRepository.addLike(client, { user_id: decryptedToken[2], liked_id: parsedData.userId })
-            } catch (error) {
-                console.log(error)
-                return { error: 'SERVER_ERROR' }
-            }
+        let addLikeRes
 
+        if (likeCheck.value == 1) {
             try {
-                res = await userRepository.addPair(client, { user_id: decryptedToken[2], user_id_2: parsedData.userId })
+                addLikeRes = await userRepository.addPair(client, {
+                    user_id: decryptedToken[2],
+                    user_id_2: parsedData.userId,
+                })
             } catch (error) {
                 return { error: 'SERVER_ERROR' }
             }
             return { message: 'PAIR_DETECTED' }
-        } else {
-            try {
-                res = await userRepository.addLike(client, { user_id: decryptedToken[2], liked_id: parsedData.userId })
-            } catch (error) {
-                console.log(error)
-                return { error: 'SERVER_ERROR' }
-            }
         }
 
         return { message: 'OK' }
@@ -263,19 +239,12 @@ module.exports = class UserController {
 
         let parsedData = JSON.parse(data)
 
-        console.log(parsedData)
-
-        console.log(parsedData.userId)
-
         const encrypt = new Encrypt()
         const decryptedToken = encrypt.decryptData(token).split('&')
-
-        console.log(decryptedToken[2])
 
         try {
             await userRepository.addDislike(client, { user_id: decryptedToken[2], user_id_2: parsedData.userId })
         } catch (error) {
-            console.log(error)
             return { error: 'SERVER_ERROR' }
         }
 

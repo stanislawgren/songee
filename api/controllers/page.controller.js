@@ -42,8 +42,6 @@ module.exports = class PageController {
             }
         })
 
-        console.log(pairsIds)
-
         let pairsProfiles = []
 
         for(let i = 0; i < pairsIds.length; i++) {

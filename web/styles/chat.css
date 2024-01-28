@@ -84,3 +84,16 @@
     cursor: pointer;
     transition: all 0.2s ease-in-out;
 }
+
+@media only screen and (max-width: 1060px) {
+    main {
+        width: 90%;
+    }
+    .chat-container {
+        flex-direction: column;
+    }
+    .chat-container-profiles {
+        width: 90%;
+        border-radius: 25px;
+    }
+}
