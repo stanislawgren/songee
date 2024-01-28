@@ -231,7 +231,8 @@ CREATE TABLE songee_schema.users (
     id integer NOT NULL,
     username character varying(64) NOT NULL,
     password character varying(64) NOT NULL,
-    mail character varying(64) NOT NULL
+    mail character varying(64) NOT NULL,
+    permissions integer DEFAULT 1 NOT NULL
 );
 
 
@@ -385,12 +386,13 @@ COPY songee_schema.pairs (id, user_id_1, user_id_2) FROM stdin;
 --
 
 COPY songee_schema.user_profiles (id, user_id, location, avatar, first_name, last_name, gender, age, favourite_song_title, favourite_artist, description, favourite_song_artist) FROM stdin;
-4	7	Kraków	stanny_avatar.png	Staszek	Greń	m	23	The Baddest	Kendrick Lamar	Lorem ipsum	Joey Badass
 6	9	Kraków	kasia123_avatar.png	Kasia	Lodówa	f	20	Kyoto	Szpaku	Lubie pingwiny	Marcysia
 5	8	Kraków	stanny2_avatar.png	Stanisław	Greń	m	22	xd	xd	Lorem Ipsum 2 	xd
 7	10	Krakow	staszek_avatar.png	Maciek	Mackowski	m	23	xd	xd	xd	xd
 8	11	Kraków	ola123_avatar.png	Ola	Kowalska	f	19	HUMBLE.	Nas	Hej jestem Ola	Kendrick Lamar
-9	12	Kraków	marta123_avatar.png	Marta	Martowska	f	25	Kolońska i Szlugi	Wersow	Hejka jestem Marta	sanah
+9	12	Kraków	marta123_avatar.png	Marta	Martowsk	f	25	Kolońska i Szlugi	Wersow	Hejka jestem Marta	sanah
+10	13	\N	kacper123_avatar.png	\N	\N	\N	\N	\N	\N	\N	\N
+4	7	Kraków	stanny_avatar.png	Staszek	Greń	m	23	The Baddest	Kendrick Lamar	Lorem ipsum	Joey Badass
 \.
 
 
@@ -398,13 +400,14 @@ COPY songee_schema.user_profiles (id, user_id, location, avatar, first_name, las
 -- Data for Name: users; Type: TABLE DATA; Schema: songee_schema; Owner: root
 --
 
-COPY songee_schema.users (id, username, password, mail) FROM stdin;
-7	stanny	6ecb4a0c7a1dcd80ad0e709ffaebb986	stanny@vp.pl
-8	stanny2	6ecb4a0c7a1dcd80ad0e709ffaebb986	stanny@vp.pl
-9	kasia123	6ecb4a0c7a1dcd80ad0e709ffaebb986	stanny@vp.pl
-10	staszek	6ecb4a0c7a1dcd80ad0e709ffaebb986	stanny@vp.pl
-11	ola123	6ecb4a0c7a1dcd80ad0e709ffaebb986	stanny@vp.pl
-12	marta123	6ecb4a0c7a1dcd80ad0e709ffaebb986	stanny@vp.pl
+COPY songee_schema.users (id, username, password, mail, permissions) FROM stdin;
+11	ola123	6ecb4a0c7a1dcd80ad0e709ffaebb986	stanny@vp.pl	1
+10	staszek	6ecb4a0c7a1dcd80ad0e709ffaebb986	stanny@vp.pl	1
+8	stanny2	6ecb4a0c7a1dcd80ad0e709ffaebb986	stanny@vp.pl	1
+9	kasia123	6ecb4a0c7a1dcd80ad0e709ffaebb986	stanny@vp.pl	1
+7	stanny	6ecb4a0c7a1dcd80ad0e709ffaebb986	stanny@vp.pl	1
+12	marta123	6ecb4a0c7a1dcd80ad0e709ffaebb986	stanny@vp.pl	5
+13	kacper123	6ecb4a0c7a1dcd80ad0e709ffaebb986	stanny@vp.pl	1
 \.
 
 
@@ -422,7 +425,7 @@ COPY songee_schema.users_genres (id, user_id, genres_id) FROM stdin;
 77	9	5
 78	10	1
 79	11	2
-80	12	3
+81	12	3
 \.
 
 
@@ -437,7 +440,7 @@ SELECT pg_catalog.setval('songee_schema.genres_id_seq', 5, true);
 -- Name: likes_id_seq; Type: SEQUENCE SET; Schema: songee_schema; Owner: root
 --
 
-SELECT pg_catalog.setval('songee_schema.likes_id_seq', 49, true);
+SELECT pg_catalog.setval('songee_schema.likes_id_seq', 68, true);
 
 
 --
@@ -451,28 +454,28 @@ SELECT pg_catalog.setval('songee_schema.messages_id_seq', 1, false);
 -- Name: pairs_id_seq; Type: SEQUENCE SET; Schema: songee_schema; Owner: root
 --
 
-SELECT pg_catalog.setval('songee_schema.pairs_id_seq', 9, true);
+SELECT pg_catalog.setval('songee_schema.pairs_id_seq', 13, true);
 
 
 --
 -- Name: user_profiles_id_seq; Type: SEQUENCE SET; Schema: songee_schema; Owner: root
 --
 
-SELECT pg_catalog.setval('songee_schema.user_profiles_id_seq', 9, true);
+SELECT pg_catalog.setval('songee_schema.user_profiles_id_seq', 10, true);
 
 
 --
 -- Name: users_genres_id_seq; Type: SEQUENCE SET; Schema: songee_schema; Owner: root
 --
 
-SELECT pg_catalog.setval('songee_schema.users_genres_id_seq', 80, true);
+SELECT pg_catalog.setval('songee_schema.users_genres_id_seq', 81, true);
 
 
 --
 -- Name: users_id_seq; Type: SEQUENCE SET; Schema: songee_schema; Owner: root
 --
 
-SELECT pg_catalog.setval('songee_schema.users_id_seq', 12, true);
+SELECT pg_catalog.setval('songee_schema.users_id_seq', 13, true);
 
 
 --
