@@ -138,6 +138,11 @@ On this page in feature, You will be able to talk with Your pairs, for now, ther
   ![image](https://github.com/stanislawgren/songee/assets/74272783/6c54a998-c1aa-4caa-b54e-b455d610e719)
 
 
+## License
+This project is licensed under the MIT License
+
+
+
 
 
 
