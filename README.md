@@ -3,8 +3,9 @@
 
 SONGEE is more than just a dating app; it's a platform that harnesses the power of music to bring people together. Our innovative approach focuses on one key element: musical taste.
 
+## Table of contents
 
-
+1. [Features](#features)
 
 ## Features
 
